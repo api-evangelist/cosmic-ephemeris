@@ -1,0 +1,57 @@
+aid: cosmic-ephemeris
+name: Cosmic Ephemeris
+description: 'Cosmic Ephemeris is a company surfaced via the API Evangelist harvest backlog (source: new-submission)
+  and added to the network as a stub for full-pipeline profiling.'
+url: https://raw.githubusercontent.com/api-evangelist/cosmic-ephemeris/refs/heads/main/apis.yml
+x-type: company
+x-source: harvest:new-submission
+x-tier: stub
+x-tier-reason: harvest
+specificationVersion: '0.20'
+created: '2026-10-20'
+modified: '2026-10-20'
+tags:
+- Company
+apis: []
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+common:
+- type: Website
+  url: https://cosmicephemeris.com/
+- type: Documentation
+  url: https://cosmicephemeris.com/docs.html
+x-submission-notes: 'Please list Cosmic Ephemeris and its public developer APIs: 78 documented astrology
+  calculations plus supplemental Tarot, symbolic readings, and Vedic systems.
+
+
+  Main OpenAPI 3.1:
+
+  https://cosmicephemeris.com/openapi.json
+
+
+  Postman collection:
+
+  https://cosmicephemeris.com/postman.json
+
+
+  Supplemental API documentation:
+
+  https://cosmicephemeris.com/docs-interpretation.html
+
+
+  MCP documentation:
+
+  https://cosmicephemeris.com/docs-mcp.html
+
+
+  Public MCP endpoint:
+
+  https://api.cosmicephemeris.com/mcp
+
+
+  Official MC'
+x-submission-probe: root 200, OpenAPI 200 (8MB), soft-404 clean
+x-submitted-by: support@cosmicephemeris.com (apis.io/add, 2026-10-18)
