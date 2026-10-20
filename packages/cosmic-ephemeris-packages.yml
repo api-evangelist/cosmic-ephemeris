@@ -1,0 +1,15 @@
+generated: '2026-10-20'
+method: probed
+generator: harvest-packages.py
+source: registry metadata endpoints (registry.npmjs.org, pypi.org, rubygems.org, api.nuget.org, packagist.org, crates.io)
+ownership_rule: 'official: true only when the registry metadata (homepage, repository, author, URLs) names the provider''s domain (cosmicephemeris.com,
+  security/cosmic-ephemeris-domain-security.yml, security/cosmic-ephemeris-vulnerability-disclosure.yml) or its accepted GitHub org.'
+packages:
+- name: cosmicephemeris
+  registry: npm
+  url: https://www.npmjs.com/package/cosmicephemeris
+  language: JavaScript
+  official: true
+  version: 0.5.0
+  published: '2026-10-15'
+  evidence: metadata names cosmicephemeris.com

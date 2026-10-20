@@ -1,0 +1,22 @@
+generated: '2026-10-20'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://cosmicephemeris.com/docs-auth.html
+sources:
+- https://cosmicephemeris.com/docs-auth.html
+- https://cosmicephemeris.com/docs-onboarding-context.html
+description: Authentication methods for Cosmic Ephemeris API
+schemes:
+- type: http-bearer
+  name: Bearer
+  evidence: 'Send it using the preferred Bearer header: Authorization: Bearer YOUR_API_KEY'
+  header: Authorization
+  how_to_obtain: Generated in the dashboard; full plaintext shown only when a key is generated or regenerated.
+- type: apiKey
+  name: x-api-key
+  evidence: 'The equivalent header below is also supported: x-api-key: YOUR_API_KEY'
+  location: header
+  header: x-api-key
+  how_to_obtain: Generated in the dashboard; full plaintext shown only when a key is generated or regenerated.
+note: No OAuth2 flows are documented.
+docs: https://cosmicephemeris.com/docs-auth.html

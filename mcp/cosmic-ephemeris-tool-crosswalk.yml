@@ -1,0 +1,35 @@
+generated: '2023-10-20'
+method: derived
+source: https://cosmicephemeris.com/docs-mcp.html
+crosswalk:
+  - tool: cosmicephemeris_calculate
+    category: calculation
+    rest:
+      - calculateNumerology
+      - calculateNatalContext
+      - calculateBirthChart
+      - calculateAspects
+      - calculateHouses
+      - calculateSynastry
+      - calculateTransits
+      - calculateHoroscope
+      - calculateNakshatraTimeline
+      - calculateNatalSvg
+      - calculateVargas
+      - calculateVimshottari
+      - calculateAshtakoota
+      - calculateAshtakavarga
+      - calculateComposite
+      - calculatePanchang
+      - calculateSecondaryProgressions
+      - calculateVargaSvg
+    binding: direct
+    confidence: high
+  - tool: cosmicephemeris_symbolic
+    category: supplemental
+    rest:
+      - calculateTarot
+      - calculateSymbolicReading
+      - calculateVedicSystem
+    binding: direct
+    confidence: high

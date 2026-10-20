@@ -1,0 +1,443 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/cosmic-ephemeris-openapi.json
+vocabulary:
+  name: Cosmic Ephemeris Domain Vocabulary
+  description: 'Terms declared by Cosmic Ephemeris''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-20'
+  terms:
+  - term: Interpretation
+    definition: Deterministic rule-based output, distinct from raw calculation data.
+    tags:
+    - Resource Group
+    source: openapi/cosmic-ephemeris-openapi.json
+  - term: NumerologyRequest
+    definition: 'Object declared by the contract with fields: birth_date, name, master_numbers, y_vowel, year.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NumerologyRequest
+  - term: NumerologyReduction
+    definition: 'Object declared by the contract with fields: total, steps, number, master_number.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NumerologyReduction
+  - term: NumerologyResponse
+    definition: 'Object declared by the contract with fields: type, status, method, input, date_components, numbers, name_analysis, metadata.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NumerologyResponse
+  - term: PlaceSearchRequest
+    definition: 'Object declared by the contract with fields: query, country_codes, limit.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlaceSearchRequest
+  - term: PlaceProvenance
+    definition: 'Object declared by the contract with fields: provider, dataset_version, source_id, license_id, attribution.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlaceProvenance
+  - term: PlaceCandidate
+    definition: 'Object declared by the contract with fields: place_id, display_name, country_code, admin1, lat, lon, timezone, provenance.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlaceCandidate
+  - term: PlaceSearchResponse
+    definition: 'Object declared by the contract with fields: type, status, query, results, result_count, metadata.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlaceSearchResponse
+  - term: TimezoneResolveRequest
+    definition: 'Object declared by the contract with fields: place_id, date, time.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TimezoneResolveRequest
+  - term: CivilTimeCandidate
+    definition: 'Object declared by the contract with fields: utc, utc_offset_seconds, utc_offset, abbreviation.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/CivilTimeCandidate
+  - term: TimezoneResolveResponse
+    definition: 'Object declared by the contract with fields: type, status, place, timezone, civil_time, calculation_ready, resolved_input, provenance.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TimezoneResolveResponse
+  - term: NatalContextFormat
+    definition: 'Enumeration declared by the contract with values: json, xml, markdown.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NatalContextFormat
+  - term: NatalContextRequest
+    definition: 'Object declared by the contract with fields: birth, zodiac, ayanamsa, house_system, formats.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NatalContextRequest
+  - term: NatalContextFact
+    definition: 'Object declared by the contract with fields: id, label, value, source.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NatalContextFact
+  - term: NatalContextArtifact
+    definition: 'Object declared by the contract with fields: format, media_type, encoding, bytes, sha256, text.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NatalContextArtifact
+  - term: NatalContextResponse
+    definition: 'Object declared by the contract with fields: type, status, schema, input, calculation_profile, facts, calculation_hash, guardrails,
+      artifacts.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NatalContextResponse
+  - term: Date
+    definition: Valid Gregorian YYYY-MM-DD local civil date, inclusive 1800-01-01 through 2200-12-31. Calendar validity and timezone conversion
+      are checked by the server.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Date
+  - term: Time
+    definition: HH:MM or HH:MM:SS; no offset in this field. Use timezone to select the civil-time zone.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Time
+  - term: Timezone
+    definition: IANA timezone name (for example America/New_York). Omission, null, or empty string means UTC for a birth input. Nonexistent or
+      ambiguous local clock-change times return 400; provide the known UTC date/time with timezone UTC instead.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Timezone
+  - term: Zodiac
+    definition: 'Enumeration declared by the contract with values: tropical, sidereal.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Zodiac
+  - term: Ayanamsa
+    definition: 'Enumeration declared by the contract with values: lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra,
+      true_revati, true_pushya, galactic_center_0_sagittarius, galactic_alignment_mardyks.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Ayanamsa
+  - term: AyanamsaResult
+    definition: null for tropical charts; selected normalized ayanamsa for sidereal charts.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/AyanamsaResult
+  - term: ZodiacInput
+    definition: tropical or sidereal; server trims whitespace and ignores case. Omitted/null selects tropical.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/ZodiacInput
+  - term: AyanamsaInput
+    definition: Sidereal supports lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra, true_revati, true_pushya, galactic_center_0_sagittarius,
+      galactic_alignment_mardyks, with case/whitespace normalization; other names return 400 in sidereal mode. Omitted/null selects lahiri. Tropical
+      mode ignores a nonempty string and outputs null. This schema describes that compatibility behavior rat
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/AyanamsaInput
+  - term: Latitude
+    definition: WGS84 decimal latitude. JSON numbers are recommended; numeric strings are accepted by the current engine, then checked for finiteness/range.
+      Exact poles and undefined Ascendant geometry return 400; supported successful latitude is strictly between -90 and 90. Boolean/null/object/array
+      coordinates are invalid.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Latitude
+  - term: Longitude
+    definition: WGS84 decimal longitude, east positive, within [-180,180]. JSON numbers are recommended; numeric strings are accepted then checked
+      for finiteness/range.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Longitude
+  - term: BirthInput
+    definition: 'Object declared by the contract with fields: date, time, timezone, lat, lon.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/BirthInput
+  - term: HistoricalDate
+    definition: Explicit civil date, 1000 BCE (BC)–2500 CE (AD); no year zero. Calendar validity is checked by the server. Available only on documented
+      connected historical operations, with explicit UT1/fixed-offset conventions.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HistoricalDate
+  - term: HistoricalClock
+    definition: Explicit HH:MM[:SS]; whole seconds only, no leap seconds. Normalized helper output includes seconds.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HistoricalClock
+  - term: HistoricalTimezone
+    definition: Explicit UT1 or fixed offset UT1+/-HH:MM[:SS], within 14 hours. Local clock minus offset yields UT1, not UTC. No IANA timezone
+      inference. Original offset spelling is preserved.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HistoricalTimezone
+  - term: HistoricalDateTime
+    definition: Shared historical input contract; parsing alone does not enable a calculation route. Derived calculation records can include fractional
+      seconds and are not this input type.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HistoricalDateTime
+  - term: BirthChartRequest
+    definition: 'Object declared by the contract with fields: date, time, timezone, lat, lon, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/BirthChartRequest
+  - term: AspectsRequest
+    definition: 'Object declared by the contract with fields: birth, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/AspectsRequest
+  - term: HouseSystemInput
+    definition: equal, whole_sign, or alias whole. Server trims whitespace and ignores case; omitted/null defaults equal. Placidus, Porphyry,
+      Meridian, Campanus, Regiomontanus, Alcabitius, Koch, Morinus, Topocentric, Sripati, Vehlow, Horizon/Azimuth, Krusinski-Pisa-Goelzer, Sunshine
+      (Treindl), Sunshine alternative (Makransky), Savard-A, Pullen SD, Pullen SR, Carter Poli-Equatorial, APC, Equal MC, Natural, and Gau
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HouseSystemInput
+  - term: HousesRequest
+    definition: 'Object declared by the contract with fields: birth, system, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HousesRequest
+  - term: SynastryRequest
+    definition: 'Object declared by the contract with fields: personA, personB, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SynastryRequest
+  - term: OptionalTransitTime
+    definition: Omitted/null means 12:00; false/empty string and malformed values are rejected.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/OptionalTransitTime
+  - term: TransitsRequest
+    definition: 'Object declared by the contract with fields: birth, transitDate, transitTime, timezone, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TransitsRequest
+  - term: HoroscopeRequest
+    definition: 'Object declared by the contract with fields: birth, transitDate, transitTime, timezone, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HoroscopeRequest
+  - term: OffsetTimestamp
+    definition: ISO 8601 timestamp with Z or an explicit numeric UTC offset. Prefer RFC 3339, e.g. 2026-01-01T00:00:00Z. Naive local timestamps
+      are rejected. The server normalizes offsets to UTC before comparing ordering, duration and the inclusive 1800-01-01 through 2200-12-31 UTC-date
+      bounds.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/OffsetTimestamp
+  - term: UtcTimestamp
+    definition: Normalized UTC timestamp; fractional seconds may be present.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/UtcTimestamp
+  - term: TimelinePlanet
+    definition: 'Enumeration declared by the contract with values: sun, moon, mercury, venus, mars, jupiter, saturn, rahu, ketu.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TimelinePlanet
+  - term: TimelineRequest
+    definition: Pro only. Unknown fields are ignored; step_seconds is not a public control and is not passed to the engine. Each admitted request
+      reserves one timeline unit, independent of range.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TimelineRequest
+  - term: PlanetName
+    definition: 'Enumeration declared by the contract with values: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlanetName
+  - term: Sign
+    definition: 'Enumeration declared by the contract with values: Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn,
+      Aquarius, Pisces.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Sign
+  - term: RoundedLongitude
+    definition: Ecliptic longitude in degrees, displayed to four decimals. Rounding of a value just below 360 can produce 360.0; do not recompute
+      sign/pada from rounded display values.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/RoundedLongitude
+  - term: DegreeInSign
+    definition: Displayed to four decimals; rounding near the next sign can produce 30.0.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/DegreeInSign
+  - term: Nakshatra
+    definition: 'Object declared by the contract with fields: index, name, ruler, pada, deg_into_nakshatra.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Nakshatra
+  - term: PlanetPosition
+    definition: Apparent geocentric JPL DE440 ecliptic position. sidereal_lon is present in sidereal mode; nakshatra is present only on the sidereal
+      Moon.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlanetPosition
+  - term: Planets
+    definition: 'Object declared by the contract with fields: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Planets
+  - term: AspectType
+    definition: 'Enumeration declared by the contract with values: conjunction, opposition, trine, square, sextile, semisextile, semisquare, quintile,
+      sesquiquadrate, biquintile.'
+    tags:
+    - Enumeration
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/AspectType
+  - term: NatalAspect
+    definition: 'Object declared by the contract with fields: p1, p2, type, exact_angle, distance, orb.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NatalAspect
+  - term: CrossAspect
+    definition: 'Object declared by the contract with fields: transit, natal, type, exact_angle, distance, orb.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/CrossAspect
+  - term: Cusps
+    definition: 'Object declared by the contract with fields: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Cusps
+  - term: HouseSystem
+    definition: 'Object declared by the contract with fields: name, houses.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HouseSystem
+  - term: HouseSystems
+    definition: 'Object declared by the contract with fields: equal, whole_sign.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HouseSystems
+  - term: Houses
+    definition: Legacy full-chart houses contain Equal and Whole Sign, sharing the eastern-horizon Ascendant and meridian MC. These chart routes
+      do not opt into Placidus. The separate /houses selected-system response is described by SelectedHouses.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Houses
+  - term: NodePosition
+    definition: 'Object declared by the contract with fields: longitude, sign, deg_in_sign.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NodePosition
+  - term: Nodes
+    definition: 'Object declared by the contract with fields: mean, true, south, note.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Nodes
+  - term: Chart
+    definition: A full calculation chart, not a rendered wheel or interpretation. Sidereal longitudes subtract the selected documented date-aware
+      ayanamsa from apparent tropical longitudes; this is not a promise of identity with every ephemeris convention.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Chart
+  - term: BirthChartEcho
+    definition: Original input values with omitted/null timezone replaced by UTC. Omitted zodiac/ayanamsa remain absent; use chart fields for
+      normalized results. Numeric coordinate strings remain strings here.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/BirthChartEcho
+  - term: BirthChartResponse
+    definition: 'Object declared by the contract with fields: type, input, chart.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/BirthChartResponse
+  - term: AspectsResponse
+    definition: The outer aspects property contains a full Chart. The aspect array is response.aspects.aspects.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/AspectsResponse
+  - term: HousesResponse
+    definition: 'Object declared by the contract with fields: type, house_system, status, zodiac, ayanamsa, planets, houses, aspects, nodes, metadata.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HousesResponse
+  - term: NormalizedBirth
+    definition: Synastry normalizes numeric coordinates, zodiac and ayanamsa. Supplied timezone is echoed (including null/empty string); omitted
+      timezone is UTC.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/NormalizedBirth
+  - term: SynastryResponse
+    definition: 'Object declared by the contract with fields: type, input, charts, aspects.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SynastryResponse
+  - term: TransitsResult
+    definition: 'Object declared by the contract with fields: status, zodiac, ayanamsa, natal_chart, transit_chart, aspects.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TransitsResult
+  - term: TransitsEcho
+    definition: 'Object declared by the contract with fields: birth, transitDate, transitTime, timezone, zodiac, ayanamsa.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TransitsEcho
+  - term: TransitsResponse
+    definition: Requested-instant transit-to-natal aspects. Not an event search, aspect windows, station prediction or house-transit report. Engine
+      output remains nested under transits.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TransitsResponse
+  - term: InterpretationAtom
+    definition: 'Object declared by the contract with fields: planet, planet_nature, planet_sect, chart_sect, aspect, natal_point, house, house_topics,
+      tone, intensity, tradition, summary_key.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/InterpretationAtom
+  - term: HoroscopeResponse
+    definition: Supported deterministic structured major-aspect signals. No language model, prose, compatibility score, medical/financial prediction,
+      or house topics. The input echo currently omits transitTime/timezone; retain your request for reproducibility.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/HoroscopeResponse
+  - term: TimelineSegment
+    definition: 'Object declared by the contract with fields: planet, ayanamsa, nakshatra_index, nakshatra_name, pada, start_utc, end_utc, sidereal_longitude_start,
+      sidereal_longitude_end, retrograde.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TimelineSegment
+  - term: TimelineResponse
+    definition: Gap-free returned residence coverage with numerically refined boundaries. Hourly discovery can miss an out-and-back departure/re-entry
+      entirely between samples. Boundary solver resolution is not physical absolute-time accuracy; this is not an exhaustive station/event finder.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/TimelineResponse
+  - term: Error
+    definition: Current gateway errors guarantee an error string, not a universal code/details envelope. Some validation errors add required/example.
+      Reverse-proxy failures can be HTML, so clients must not assume JSON for every non-2xx.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/Error
+  - term: SiderealFlagsConstraint
+    definition: Only supported ayanamsa names are valid when zodiac is sidereal; tropical retains its legacy ignore behavior.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SiderealFlagsConstraint
+  - term: SelectedHouseSystem
+    definition: 'Object declared by the contract with fields: name, houses.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SelectedHouseSystem
+  - term: GauquelinSectors
+    definition: All 36 clockwise Gauquelin sector boundaries; 1 is the Ascendant, 10 the Midheaven, 19 the Descendant, and 28 the Imum Coeli.
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/GauquelinSectors
+  - term: SelectedGauquelinSystem
+    definition: 'Object declared by the contract with fields: name, houses.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SelectedGauquelinSystem
+  - term: SelectedHouseSystems
+    definition: 'Object declared by the contract with fields: equal, whole_sign, placidus, porphyry, meridian, campanus, regiomontanus, alcabitius,
+      koch, morinus, topocentric, sripati. (13 more)'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SelectedHouseSystems
+  - term: SelectedHouseMetadata
+    definition: 'Object declared by the contract with fields: zodiac, ayanamsa, status, fallback, convention, variant, sun_declination_frame,
+      polar_policy.'
+    tags:
+    - Object
+    source: openapi/cosmic-ephemeris-openapi.json#/components/schemas/SelectedHouseMetadata

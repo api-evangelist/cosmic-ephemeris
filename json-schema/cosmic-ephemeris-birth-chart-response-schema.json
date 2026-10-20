@@ -1,0 +1,734 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cosmic-ephemeris/main/json-schema/cosmic-ephemeris-birth-chart-response-schema.json",
+  "title": "BirthChartResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cosmic-ephemeris-openapi.json#/components/schemas/BirthChartResponse",
+  "type": "object",
+  "properties": {
+    "type": {
+      "const": "birth-chart"
+    },
+    "input": {
+      "$ref": "#/$defs/BirthChartEcho"
+    },
+    "chart": {
+      "$ref": "#/$defs/Chart"
+    }
+  },
+  "required": [
+    "type",
+    "input",
+    "chart"
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "AspectType": {
+      "type": "string",
+      "enum": [
+        "conjunction",
+        "opposition",
+        "trine",
+        "square",
+        "sextile",
+        "semisextile",
+        "semisquare",
+        "quintile",
+        "sesquiquadrate",
+        "biquintile"
+      ]
+    },
+    "Ayanamsa": {
+      "type": "string",
+      "enum": [
+        "lahiri",
+        "raman",
+        "krishnamurti",
+        "fagan_bradley",
+        "yukteshwar",
+        "sassanian",
+        "true_chitra",
+        "true_revati",
+        "true_pushya",
+        "galactic_center_0_sagittarius",
+        "galactic_alignment_mardyks"
+      ]
+    },
+    "AyanamsaInput": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "\\S",
+      "default": "lahiri",
+      "description": "Sidereal supports lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra, true_revati, true_pushya, galactic_center_0_sagittarius, galactic_alignment_mardyks, with case/whitespace normalization; other names return 400 in sidereal mode. Omitted/null selects lahiri. Tropical mode ignores a nonempty string and outputs null. This schema describes that compatibility behavior rather than claiming every string is a supported sidereal model.",
+      "x-canonical-values": [
+        "lahiri",
+        "raman",
+        "krishnamurti",
+        "fagan_bradley",
+        "yukteshwar",
+        "sassanian",
+        "true_chitra",
+        "true_revati",
+        "true_pushya",
+        "galactic_center_0_sagittarius",
+        "galactic_alignment_mardyks"
+      ]
+    },
+    "AyanamsaResult": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Ayanamsa"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "null for tropical charts; selected normalized ayanamsa for sidereal charts."
+    },
+    "BirthChartEcho": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Date"
+            },
+            {
+              "$ref": "#/$defs/HistoricalDate"
+            }
+          ]
+        },
+        "time": {
+          "$ref": "#/$defs/Time"
+        },
+        "timezone": {
+          "$ref": "#/$defs/Timezone"
+        },
+        "lat": {
+          "$ref": "#/$defs/Latitude"
+        },
+        "lon": {
+          "$ref": "#/$defs/Longitude"
+        },
+        "zodiac": {
+          "$ref": "#/$defs/ZodiacInput"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/AyanamsaInput"
+        }
+      },
+      "required": [
+        "date",
+        "time",
+        "timezone",
+        "lat",
+        "lon"
+      ],
+      "additionalProperties": true,
+      "description": "Original input values with omitted/null timezone replaced by UTC. Omitted zodiac/ayanamsa remain absent; use chart fields for normalized results. Numeric coordinate strings remain strings here."
+    },
+    "Chart": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "ok"
+        },
+        "zodiac": {
+          "$ref": "#/$defs/Zodiac"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/AyanamsaResult"
+        },
+        "planets": {
+          "$ref": "#/$defs/Planets"
+        },
+        "houses": {
+          "$ref": "#/$defs/Houses"
+        },
+        "aspects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NatalAspect"
+          }
+        },
+        "nodes": {
+          "$ref": "#/$defs/Nodes"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "note"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "status",
+        "zodiac",
+        "ayanamsa",
+        "planets",
+        "houses",
+        "aspects",
+        "nodes",
+        "metadata"
+      ],
+      "additionalProperties": true,
+      "description": "A full calculation chart, not a rendered wheel or interpretation. Sidereal longitudes subtract the selected documented date-aware ayanamsa from apparent tropical longitudes; this is not a promise of identity with every ephemeris convention."
+    },
+    "Cusps": {
+      "type": "object",
+      "properties": {
+        "1": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "2": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "3": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "4": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "5": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "6": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "7": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "8": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "9": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "10": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "11": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "12": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        }
+      },
+      "required": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "additionalProperties": false
+    },
+    "Date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^(?:18[0-9]{2}|19[0-9]{2}|2[01][0-9]{2}|2200)-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$",
+      "description": "Valid Gregorian YYYY-MM-DD local civil date, inclusive 1800-01-01 through 2200-12-31. Calendar validity and timezone conversion are checked by the server."
+    },
+    "DegreeInSign": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30,
+      "description": "Displayed to four decimals; rounding near the next sign can produce 30.0."
+    },
+    "HistoricalDate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "era",
+        "month",
+        "day",
+        "calendar"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2500
+        },
+        "era": {
+          "enum": [
+            "BCE",
+            "CE"
+          ],
+          "description": "Display BCE (BC) / CE (AD); API values remain BCE / CE. No year zero."
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "calendar": {
+          "enum": [
+            "proleptic_gregorian",
+            "proleptic_julian"
+          ],
+          "description": "Explicit choice; applies the selected calendar rules throughout history without a regional adoption switch."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "era": {
+                "const": "BCE"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "maximum": 1000
+              }
+            }
+          }
+        }
+      ],
+      "description": "Explicit civil date, 1000 BCE (BC)–2500 CE (AD); no year zero. Calendar validity is checked by the server. Available only on documented connected historical operations, with explicit UT1/fixed-offset conventions."
+    },
+    "HouseSystem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Equal",
+            "Whole sign"
+          ]
+        },
+        "houses": {
+          "$ref": "#/$defs/Cusps"
+        }
+      },
+      "required": [
+        "name",
+        "houses"
+      ],
+      "additionalProperties": true
+    },
+    "HouseSystems": {
+      "type": "object",
+      "properties": {
+        "equal": {
+          "$ref": "#/$defs/HouseSystem"
+        },
+        "whole_sign": {
+          "$ref": "#/$defs/HouseSystem"
+        }
+      },
+      "required": [],
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "Houses": {
+      "type": "object",
+      "properties": {
+        "ascendant": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "mc": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "systems": {
+          "$ref": "#/$defs/HouseSystems"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "zodiac": {
+              "$ref": "#/$defs/Zodiac"
+            },
+            "ayanamsa": {
+              "$ref": "#/$defs/AyanamsaResult"
+            }
+          },
+          "required": [
+            "zodiac",
+            "ayanamsa"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "ascendant",
+        "mc",
+        "systems",
+        "metadata"
+      ],
+      "additionalProperties": true,
+      "description": "Legacy full-chart houses contain Equal and Whole Sign, sharing the eastern-horizon Ascendant and meridian MC. These chart routes do not opt into Placidus. The separate /houses selected-system response is described by SelectedHouses."
+    },
+    "Latitude": {
+      "anyOf": [
+        {
+          "type": "number",
+          "exclusiveMinimum": -90,
+          "exclusiveMaximum": 90
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+        }
+      ],
+      "description": "WGS84 decimal latitude. JSON numbers are recommended; numeric strings are accepted by the current engine, then checked for finiteness/range. Exact poles and undefined Ascendant geometry return 400; supported successful latitude is strictly between -90 and 90. Boolean/null/object/array coordinates are invalid."
+    },
+    "Longitude": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+        }
+      ],
+      "description": "WGS84 decimal longitude, east positive, within [-180,180]. JSON numbers are recommended; numeric strings are accepted then checked for finiteness/range."
+    },
+    "Nakshatra": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 27
+        },
+        "name": {
+          "type": "string"
+        },
+        "ruler": {
+          "type": "string"
+        },
+        "pada": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "deg_into_nakshatra": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 13.333334
+        }
+      },
+      "required": [
+        "index",
+        "name",
+        "ruler",
+        "pada",
+        "deg_into_nakshatra"
+      ],
+      "additionalProperties": true
+    },
+    "NatalAspect": {
+      "type": "object",
+      "properties": {
+        "p1": {
+          "$ref": "#/$defs/PlanetName"
+        },
+        "p2": {
+          "$ref": "#/$defs/PlanetName"
+        },
+        "type": {
+          "$ref": "#/$defs/AspectType"
+        },
+        "exact_angle": {
+          "type": "number",
+          "enum": [
+            0,
+            180,
+            120,
+            90,
+            60,
+            30,
+            45,
+            72,
+            135,
+            144
+          ]
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 180
+        },
+        "orb": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "p1",
+        "p2",
+        "type",
+        "exact_angle",
+        "distance",
+        "orb"
+      ],
+      "additionalProperties": true
+    },
+    "NodePosition": {
+      "type": "object",
+      "properties": {
+        "longitude": {
+          "$ref": "#/$defs/RoundedLongitude"
+        },
+        "sign": {
+          "$ref": "#/$defs/Sign"
+        },
+        "deg_in_sign": {
+          "$ref": "#/$defs/DegreeInSign"
+        }
+      },
+      "required": [
+        "longitude",
+        "sign",
+        "deg_in_sign"
+      ],
+      "additionalProperties": true
+    },
+    "Nodes": {
+      "type": "object",
+      "properties": {
+        "mean": {
+          "$ref": "#/$defs/NodePosition"
+        },
+        "true": {
+          "$ref": "#/$defs/NodePosition",
+          "description": "Geometric osculating north node from the same-instant Moon-minus-Earth position and inertial velocity, in the true date ecliptic. Replaces the former mean-node alias."
+        },
+        "south": {
+          "$ref": "#/$defs/NodePosition",
+          "description": "Mean south node (Ketu), opposite mean, not opposite true. Use lunar-nodes for the osculating south node."
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mean",
+        "true",
+        "south",
+        "note"
+      ],
+      "additionalProperties": true
+    },
+    "PlanetName": {
+      "type": "string",
+      "enum": [
+        "Sun",
+        "Moon",
+        "Mercury",
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn",
+        "Uranus",
+        "Neptune",
+        "Pluto"
+      ]
+    },
+    "PlanetPosition": {
+      "type": "object",
+      "properties": {
+        "lon": {
+          "$ref": "#/$defs/RoundedLongitude"
+        },
+        "sign": {
+          "$ref": "#/$defs/Sign"
+        },
+        "deg_in_sign": {
+          "$ref": "#/$defs/DegreeInSign"
+        },
+        "speed_deg_per_day": {
+          "type": "number",
+          "description": "Signed tropical longitude difference over the preceding one TT day, rounded to four decimals; not an instantaneous derivative."
+        },
+        "retrograde": {
+          "type": "boolean"
+        },
+        "tropical_lon": {
+          "$ref": "#/$defs/RoundedLongitude"
+        },
+        "sidereal_lon": {
+          "$ref": "#/$defs/RoundedLongitude"
+        },
+        "nakshatra": {
+          "$ref": "#/$defs/Nakshatra",
+          "description": "Present only for the Moon in sidereal chart output."
+        }
+      },
+      "required": [
+        "lon",
+        "sign",
+        "deg_in_sign",
+        "speed_deg_per_day",
+        "retrograde",
+        "tropical_lon"
+      ],
+      "additionalProperties": true,
+      "description": "Apparent geocentric JPL DE440 ecliptic position. sidereal_lon is present in sidereal mode; nakshatra is present only on the sidereal Moon."
+    },
+    "Planets": {
+      "type": "object",
+      "properties": {
+        "Sun": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Moon": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Mercury": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Venus": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Mars": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Jupiter": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Saturn": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Uranus": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Neptune": {
+          "$ref": "#/$defs/PlanetPosition"
+        },
+        "Pluto": {
+          "$ref": "#/$defs/PlanetPosition"
+        }
+      },
+      "required": [
+        "Sun",
+        "Moon",
+        "Mercury",
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn",
+        "Uranus",
+        "Neptune",
+        "Pluto"
+      ],
+      "additionalProperties": true
+    },
+    "RoundedLongitude": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 360,
+      "description": "Ecliptic longitude in degrees, displayed to four decimals. Rounding of a value just below 360 can produce 360.0; do not recompute sign/pada from rounded display values."
+    },
+    "Sign": {
+      "type": "string",
+      "enum": [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces"
+      ]
+    },
+    "Time": {
+      "type": "string",
+      "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$",
+      "description": "HH:MM or HH:MM:SS; no offset in this field. Use timezone to select the civil-time zone."
+    },
+    "Timezone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "IANA timezone name (for example America/New_York). Omission, null, or empty string means UTC for a birth input. Nonexistent or ambiguous local clock-change times return 400; provide the known UTC date/time with timezone UTC instead."
+    },
+    "Zodiac": {
+      "type": "string",
+      "enum": [
+        "tropical",
+        "sidereal"
+      ]
+    },
+    "ZodiacInput": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\s*(?:[Tt][Rr][Oo][Pp][Ii][Cc][Aa][Ll]|[Ss][Ii][Dd][Ee][Rr][Ee][Aa][Ll])\\s*$",
+      "default": "tropical",
+      "description": "tropical or sidereal; server trims whitespace and ignores case. Omitted/null selects tropical.",
+      "x-canonical-values": [
+        "tropical",
+        "sidereal"
+      ]
+    }
+  }
+}

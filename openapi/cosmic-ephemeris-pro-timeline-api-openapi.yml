@@ -1,0 +1,640 @@
+openapi: 3.2.0
+info:
+  title: Cosmic Ephemeris calculation Pro timeline API
+  version: 2026-10-12.current-contract-promotion
+  description: Machine-readable description of the seventy-eight live R231 calculation contracts. This DOCUMENT REVISION identifies the contract set; runtime availability is independently verified at the public gateway. Call the public Node gateway, not the internal Python service. API keys are server-side credentials. Bearer and x-api-key are alternatives, and dashboard cookies are not calculation credentials. Named keys can be restricted to one calculation scope or astro:*, can expire, and are shown only once at creation. Charts require a known civil time, valid IANA timezone, dates from 1800-01-01 through 2200-12-31, and valid coordinates. Tropical remains the default; supported sidereal ayanamsas are Lahiri, Raman, Krishnamurti, Fagan–Bradley, Yukteshwar, Sassanian, True Chitra, True Revati, True Pushya, Galactic Center at 0 Sagittarius, and Galactic Alignment/Mardyks. The birth-time-sensitivity workflow may instead receive an explicitly unknown or approximate time; it returns sampled stability only and never invents an exact chart. Vargas supports D1/D2/D3/D4/D5/D6/D7/D8/D9/D10/D11/D12/D16/D20/D24/D27/D30/D40/D45/D60/D81/D108/D144/D150. Vimshottari retains its two-level default and supports optional depth 3 and 4. The Ashtakavarga contract returns unreduced seven-planet Bhinnashtakavarga, contributor Prastara, and their 337-point Sarvashtakavarga sum, with explicit opt-in reductions and pindas and no interpretation or prediction. These are bounded calculation conventions, not a complete Jyotish system or practitioner validation.
+  termsOfService: https://cosmicephemeris.com/terms.html
+  contact:
+    name: Cosmic Ephemeris support
+    email: support@cosmicephemeris.com
+servers:
+- url: https://api.cosmicephemeris.com
+  description: Public gateway; no runtime version prefix
+security:
+- BearerApiKey: []
+- HeaderApiKey: []
+tags:
+- name: Pro timeline
+paths:
+  /api/astro/nakshatra-timeline:
+    post:
+      operationId: calculateNakshatraTimeline
+      summary: Calculate Pro sidereal nakshatra/pada residences
+      tags:
+      - Pro timeline
+      description: 'Gap-free returned residence coverage with numerically refined boundaries. Hourly discovery can miss an out-and-back departure/re-entry entirely between samples. Boundary solver resolution is not physical absolute-time accuracy; this is not an exhaustive station/event finder.
+
+
+        Each admitted request reserves one monthly usage unit before route validation or engine work; failed or timed-out admitted attempts are not refunded. Do not automatically retry.
+
+        Historical mode uses an explicit BCE/CE date object and UT1 conventions. Its response is the versioned historical envelope, not the modern UTC envelope. Read result for calculation fields and metadata for limits and uncertainty.'
+      x-contract-status: current
+      x-engine-timeout-ms: 60000
+      x-quota-group: nakshatra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectedTimelineRequest'
+            examples:
+              canonical:
+                summary: Synthetic example; send with your server-side API key
+                value:
+                  planet: saturn
+                  start_utc: '2026-01-01T00:00:00Z'
+                  end_utc: '2026-01-03T00:00:00Z'
+                  ayanamsa: lahiri
+              historical:
+                summary: Explicit historical input; bounded tool-specific work
+                value:
+                  start:
+                    date:
+                      year: 1000
+                      era: BCE
+                      month: 1
+                      day: 1
+                      calendar: proleptic_gregorian
+                    time: '12:00'
+                    timezone: UT1
+                  end:
+                    date:
+                      year: 1000
+                      era: BCE
+                      month: 1
+                      day: 2
+                      calendar: proleptic_gregorian
+                    time: 00:00:00
+                    timezone: UT1
+                  planet: moon
+      responses:
+        '200':
+          description: Successful calculation. Field nesting is specific to this route.
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                const: no-store
+            Pragma:
+              schema:
+                type: string
+                const: no-cache
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedTimelineResponse'
+              examples:
+                canonical:
+                  summary: Successful response for the canonical synthetic request
+                  value:
+                    planet: saturn
+                    zodiac_used: sidereal
+                    ayanamsa_used: lahiri
+                    start_utc: '2026-01-01T00:00:00Z'
+                    end_utc: '2026-01-03T00:00:00Z'
+                    step_seconds: 3600
+                    segments:
+                    - planet: saturn
+                      ayanamsa: lahiri
+                      nakshatra_index: 25
+                      nakshatra_name: Purva Bhadrapada
+                      pada: 4
+                      start_utc: '2026-01-01T00:00:00Z'
+                      end_utc: '2026-01-03T00:00:00Z'
+                      sidereal_longitude_start: 331.94693775435445
+                      sidereal_longitude_end: 332.0666041383707
+                      retrograde: false
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/ProRequired'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '413':
+          $ref: '#/components/responses/TooLarge'
+        '429':
+          $ref: '#/components/responses/Limited'
+        '500':
+          $ref: '#/components/responses/InternalFailure'
+        '502':
+          $ref: '#/components/responses/EngineUnavailable'
+        '503':
+          $ref: '#/components/responses/Busy'
+        '504':
+          $ref: '#/components/responses/EngineTimeout'
+components:
+  responses:
+    ProRequired:
+      description: Timeline requires effective Pro entitlement; admission is refused before quota reservation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Pro plan required
+    NotFound:
+      description: Wrong/case-variant/noncanonical or trailing-slash route; public paths have no version prefix.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Not found
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    Busy:
+      description: 'Four-request global calculation pool full (Retry-After: 2), maintenance or upstream service unavailable.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Astrology service is busy; retry shortly
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+      headers:
+        Retry-After:
+          description: Present for application concurrency rejection as 2 seconds. Other rejection sources may omit it or use a different delay. Do not automatically retry charged calculation attempts.
+          schema:
+            type: string
+    Unauthorized:
+      description: Missing, invalid, revoked API key or unavailable activated key owner. Dashboard cookies do not authenticate calculation routes.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Missing API key
+    InvalidInput:
+      description: Invalid request, malformed JSON, out-of-range date/location, unknown model, invalid timezone or ambiguous/nonexistent clock-change time. Invalid attempts reaching quota reservation consume one unit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Invalid request
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    Forbidden:
+      description: Origin not allowed by production CORS policy. Server-to-server requests can omit Origin.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Origin not allowed
+    EngineUnavailable:
+      description: Engine unavailable, unsuccessful internal server response or invalid upstream JSON. No engine internals are exposed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Birth chart calculation failed
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    EngineTimeout:
+      description: 'Application engine timeout: 15 seconds normally; planetary events, house ingresses, aspect windows, event calendar, eclipse geometry, electional search, and event-rule search use 30 seconds; Nakshatra Timeline plus the explicitly enumerated readiness, robustness, location, uncertainty, and electional-audit family use 60 seconds. Timer includes response-body parsing; an admitted timeout consumes quota.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Birth chart calculation failed
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    Limited:
+      description: 'Monthly quota exhausted, per-user two-request concurrency reached, or nginx rate/connection admission refused. Retry-After: 2 is sent for application per-user concurrency only, not a promise that monthly quota resets in two seconds.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: API quota exceeded
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+      headers:
+        Retry-After:
+          description: Present for application concurrency rejection as 2 seconds. Other rejection sources may omit it or use a different delay. Do not automatically retry charged calculation attempts.
+          schema:
+            type: string
+    InternalFailure:
+      description: Bounded gateway/database/internal failure. An admitted attempt can still consume quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Server error
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    TooLarge:
+      description: Request exceeds the body limit; gateway JSON is capped at 128 KiB. Edge failures may be HTML.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Request body too large
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        required:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              anyOf:
+              - type: string
+              - type: array
+                items:
+                  type: string
+        example:
+          type: object
+          additionalProperties: true
+      required:
+      - error
+      additionalProperties: true
+      description: Current gateway errors guarantee an error string, not a universal code/details envelope. Some validation errors add required/example. Reverse-proxy failures can be HTML, so clients must not assume JSON for every non-2xx.
+    HistoricalTimezone:
+      type: string
+      pattern: ^UT1(?:[+-](?:0[0-9]|1[0-3]):[0-5][0-9](?::[0-5][0-9])?|[+-]14:00(?::00)?)?(?![\s\S])
+      description: Explicit UT1 or fixed offset UT1+/-HH:MM[:SS], within 14 hours. Local clock minus offset yields UT1, not UTC. No IANA timezone inference. Original offset spelling is preserved.
+    OffsetTimestamp:
+      type: string
+      format: date-time
+      description: ISO 8601 timestamp with Z or an explicit numeric UTC offset. Prefer RFC 3339, e.g. 2026-01-01T00:00:00Z. Naive local timestamps are rejected. The server normalizes offsets to UTC before comparing ordering, duration and the inclusive 1800-01-01 through 2200-12-31 UTC-date bounds.
+    UtcTimestamp:
+      type: string
+      format: date-time
+      pattern: Z$
+      description: Normalized UTC timestamp; fractional seconds may be present.
+    HistoricalDate:
+      type: object
+      additionalProperties: false
+      required:
+      - year
+      - era
+      - month
+      - day
+      - calendar
+      properties:
+        year:
+          type: integer
+          minimum: 1
+          maximum: 2500
+        era:
+          enum:
+          - BCE
+          - CE
+          description: Display BCE (BC) / CE (AD); API values remain BCE / CE. No year zero.
+        month:
+          type: integer
+          minimum: 1
+          maximum: 12
+        day:
+          type: integer
+          minimum: 1
+          maximum: 31
+        calendar:
+          enum:
+          - proleptic_gregorian
+          - proleptic_julian
+          description: Explicit choice; applies the selected calendar rules throughout history without a regional adoption switch.
+      allOf:
+      - if:
+          type: object
+          properties:
+            era:
+              const: BCE
+        then:
+          type: object
+          properties:
+            year:
+              maximum: 1000
+      description: Explicit civil date, 1000 BCE (BC)–2500 CE (AD); no year zero. Calendar validity is checked by the server. Available only on documented connected historical operations, with explicit UT1/fixed-offset conventions.
+    HistoricalDateTime:
+      type: object
+      additionalProperties: false
+      required:
+      - date
+      - time
+      - timezone
+      properties:
+        date:
+          $ref: '#/components/schemas/HistoricalDate'
+        time:
+          $ref: '#/components/schemas/HistoricalClock'
+        timezone:
+          $ref: '#/components/schemas/HistoricalTimezone'
+      description: Shared historical input contract; parsing alone does not enable a calculation route. Derived calculation records can include fractional seconds and are not this input type.
+    TimelineResponse:
+      type: object
+      properties:
+        planet:
+          $ref: '#/components/schemas/TimelinePlanet'
+        zodiac_used:
+          const: sidereal
+        ayanamsa_used:
+          $ref: '#/components/schemas/Ayanamsa'
+        start_utc:
+          $ref: '#/components/schemas/UtcTimestamp'
+        end_utc:
+          $ref: '#/components/schemas/UtcTimestamp'
+        step_seconds:
+          const: 3600
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimelineSegment'
+          minItems: 1
+      required:
+      - planet
+      - zodiac_used
+      - ayanamsa_used
+      - start_utc
+      - end_utc
+      - step_seconds
+      - segments
+      additionalProperties: true
+      description: Gap-free returned residence coverage with numerically refined boundaries. Hourly discovery can miss an out-and-back departure/re-entry entirely between samples. Boundary solver resolution is not physical absolute-time accuracy; this is not an exhaustive station/event finder.
+    HistoricalTimelineRequest:
+      type: object
+      properties:
+        planet:
+          type: string
+          description: One of sun, moon, mercury, venus, mars, jupiter, saturn, rahu, ketu. Case/whitespace are normalized. Rahu/Ketu are mean lunar nodes.
+          x-canonical-values:
+          - sun
+          - moon
+          - mercury
+          - venus
+          - mars
+          - jupiter
+          - saturn
+          - rahu
+          - ketu
+          pattern: ^\s*(?:[Ss][Uu][Nn]|[Mm][Oo][Oo][Nn]|[Mm][Ee][Rr][Cc][Uu][Rr][Yy]|[Vv][Ee][Nn][Uu][Ss]|[Mm][Aa][Rr][Ss]|[Jj][Uu][Pp][Ii][Tt][Ee][Rr]|[Ss][Aa][Tt][Uu][Rr][Nn]|[Rr][Aa][Hh][Uu]|[Kk][Ee][Tt][Uu])\s*$
+        ayanamsa:
+          type: string
+          description: Required even though chart endpoints default it. One of lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra, true_revati, true_pushya, galactic_center_0_sagittarius, galactic_alignment_mardyks; case/whitespace are normalized.
+          x-canonical-values:
+          - lahiri
+          - raman
+          - krishnamurti
+          - fagan_bradley
+          - yukteshwar
+          - sassanian
+          - true_chitra
+          - true_revati
+          - true_pushya
+          - galactic_center_0_sagittarius
+          - galactic_alignment_mardyks
+          pattern: ^\s*(?:[Ll][Aa][Hh][Ii][Rr][Ii]|[Rr][Aa][Mm][Aa][Nn]|[Kk][Rr][Ii][Ss][Hh][Nn][Aa][Mm][Uu][Rr][Tt][Ii]|[Ff][Aa][Gg][Aa][Nn]_[Bb][Rr][Aa][Dd][Ll][Ee][Yy]|[Yy][Uu][Kk][Tt][Ee][Ss][Hh][Ww][Aa][Rr]|[Ss][Aa][Ss][Ss][Aa][Nn][Ii][Aa][Nn]|[Tt][Rr][Uu][Ee]_[Cc][Hh][Ii][Tt][Rr][Aa]|[Tt][Rr][Uu][Ee]_[Rr][Ee][Vv][Aa][Tt][Ii]|[Tt][Rr][Uu][Ee]_[Pp][Uu][Ss][Hh][Yy][Aa]|[Gg][Aa][Ll][Aa][Cc][Tt][Ii][Cc]_[Cc][Ee][Nn][Tt][Ee][Rr]_0_[Ss][Aa][Gg][Ii][Tt][Tt][Aa][Rr][Ii][Uu][Ss]|[Gg][Aa][Ll][Aa][Cc][Tt][Ii][Cc]_[Aa][Ll][Ii][Gg][Nn][Mm][Ee][Nn][Tt]_[Mm][Aa][Rr][Dd][Yy][Kk][Ss])\s*$
+        start:
+          $ref: '#/components/schemas/HistoricalDateTime'
+        end:
+          $ref: '#/components/schemas/HistoricalDateTime'
+        step_seconds:
+          const: 3600
+      required:
+      - planet
+      - start
+      - end
+      additionalProperties: false
+      description: Explicit historical mode, 1000 BCE (BC)–2500 CE (AD). No year zero, implicit calendar, UTC or IANA zone. Preserve tool-specific mathematical, geographic and search limits; calendar/time conventions and estimated Delta-T are not certified historical accuracy.
+    TimelineSegment:
+      type: object
+      properties:
+        planet:
+          $ref: '#/components/schemas/TimelinePlanet'
+        ayanamsa:
+          $ref: '#/components/schemas/Ayanamsa'
+        nakshatra_index:
+          type: integer
+          minimum: 1
+          maximum: 27
+        nakshatra_name:
+          type: string
+        pada:
+          type: integer
+          minimum: 1
+          maximum: 4
+        start_utc:
+          $ref: '#/components/schemas/UtcTimestamp'
+        end_utc:
+          $ref: '#/components/schemas/UtcTimestamp'
+        sidereal_longitude_start:
+          type: number
+          minimum: 0
+          exclusiveMaximum: 360
+        sidereal_longitude_end:
+          type: number
+          minimum: 0
+          exclusiveMaximum: 360
+        retrograde:
+          type: boolean
+          description: Net direction across this returned residence segment, not a guarantee of uniform motion throughout a station-spanning segment.
+      required:
+      - planet
+      - ayanamsa
+      - nakshatra_index
+      - nakshatra_name
+      - pada
+      - start_utc
+      - end_utc
+      - sidereal_longitude_start
+      - sidereal_longitude_end
+      - retrograde
+      additionalProperties: true
+    HistoricalClock:
+      type: string
+      pattern: ^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?(?![\s\S])
+      description: Explicit HH:MM[:SS]; whole seconds only, no leap seconds. Normalized helper output includes seconds.
+    ConnectedTimelineRequest:
+      oneOf:
+      - $ref: '#/components/schemas/TimelineRequest'
+      - $ref: '#/components/schemas/HistoricalTimelineRequest'
+    TimelineRequest:
+      type: object
+      properties:
+        planet:
+          type: string
+          description: One of sun, moon, mercury, venus, mars, jupiter, saturn, rahu, ketu. Case/whitespace are normalized. Rahu/Ketu are mean lunar nodes.
+          x-canonical-values:
+          - sun
+          - moon
+          - mercury
+          - venus
+          - mars
+          - jupiter
+          - saturn
+          - rahu
+          - ketu
+          pattern: ^\s*(?:[Ss][Uu][Nn]|[Mm][Oo][Oo][Nn]|[Mm][Ee][Rr][Cc][Uu][Rr][Yy]|[Vv][Ee][Nn][Uu][Ss]|[Mm][Aa][Rr][Ss]|[Jj][Uu][Pp][Ii][Tt][Ee][Rr]|[Ss][Aa][Tt][Uu][Rr][Nn]|[Rr][Aa][Hh][Uu]|[Kk][Ee][Tt][Uu])\s*$
+        start_utc:
+          $ref: '#/components/schemas/OffsetTimestamp'
+        end_utc:
+          $ref: '#/components/schemas/OffsetTimestamp'
+          description: Must be strictly later than start_utc and at most 180 days later. Both UTC dates must be inside the public date window.
+        ayanamsa:
+          type: string
+          description: Required even though chart endpoints default it. One of lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra, true_revati, true_pushya, galactic_center_0_sagittarius, galactic_alignment_mardyks; case/whitespace are normalized.
+          x-canonical-values:
+          - lahiri
+          - raman
+          - krishnamurti
+          - fagan_bradley
+          - yukteshwar
+          - sassanian
+          - true_chitra
+          - true_revati
+          - true_pushya
+          - galactic_center_0_sagittarius
+          - galactic_alignment_mardyks
+          pattern: ^\s*(?:[Ll][Aa][Hh][Ii][Rr][Ii]|[Rr][Aa][Mm][Aa][Nn]|[Kk][Rr][Ii][Ss][Hh][Nn][Aa][Mm][Uu][Rr][Tt][Ii]|[Ff][Aa][Gg][Aa][Nn]_[Bb][Rr][Aa][Dd][Ll][Ee][Yy]|[Yy][Uu][Kk][Tt][Ee][Ss][Hh][Ww][Aa][Rr]|[Ss][Aa][Ss][Ss][Aa][Nn][Ii][Aa][Nn]|[Tt][Rr][Uu][Ee]_[Cc][Hh][Ii][Tt][Rr][Aa]|[Tt][Rr][Uu][Ee]_[Rr][Ee][Vv][Aa][Tt][Ii]|[Tt][Rr][Uu][Ee]_[Pp][Uu][Ss][Hh][Yy][Aa]|[Gg][Aa][Ll][Aa][Cc][Tt][Ii][Cc]_[Cc][Ee][Nn][Tt][Ee][Rr]_0_[Ss][Aa][Gg][Ii][Tt][Tt][Aa][Rr][Ii][Uu][Ss]|[Gg][Aa][Ll][Aa][Cc][Tt][Ii][Cc]_[Aa][Ll][Ii][Gg][Nn][Mm][Ee][Nn][Tt]_[Mm][Aa][Rr][Dd][Yy][Kk][Ss])\s*$
+      required:
+      - planet
+      - start_utc
+      - end_utc
+      - ayanamsa
+      additionalProperties: true
+      description: Pro only. Unknown fields are ignored; step_seconds is not a public control and is not passed to the engine. Each admitted request reserves one timeline unit, independent of range.
+    ConnectedTimelineResponse:
+      oneOf:
+      - $ref: '#/components/schemas/TimelineResponse'
+      - $ref: '#/components/schemas/HistoricalTimelineResponse'
+    TimelinePlanet:
+      type: string
+      enum:
+      - sun
+      - moon
+      - mercury
+      - venus
+      - mars
+      - jupiter
+      - saturn
+      - rahu
+      - ketu
+    HistoricalTimelineResponse:
+      type: object
+      additionalProperties: true
+      required:
+      - schema
+      - status
+      - type
+      - input
+      - result
+      - metadata
+      properties:
+        schema:
+          const: cosmicephemeris-historical-calculation-v1
+        status:
+          const: historical
+        type:
+          const: nakshatra-timeline
+        input:
+          $ref: '#/components/schemas/HistoricalTimelineRequest'
+        result:
+          type: object
+          additionalProperties: true
+          description: Complete historical calculation adapter result. Times are explicit UT1 date records, never UTC strings; derived times may include fractional seconds and years outside the input range.
+        metadata:
+          type: object
+          additionalProperties: true
+          required:
+          - time_standard
+          - historical_accuracy_certified
+          - warnings
+          properties:
+            time_standard:
+              const: UT1
+            historical_accuracy_certified:
+              const: false
+            warnings:
+              type: array
+              items:
+                type: string
+    Ayanamsa:
+      type: string
+      enum:
+      - lahiri
+      - raman
+      - krishnamurti
+      - fagan_bradley
+      - yukteshwar
+      - sassanian
+      - true_chitra
+      - true_revati
+      - true_pushya
+      - galactic_center_0_sagittarius
+      - galactic_alignment_mardyks
+  securitySchemes:
+    BearerApiKey:
+      type: http
+      scheme: bearer
+      bearerFormat: 64 hexadecimal characters
+      description: Opaque 256-bit Cosmic Ephemeris key; not a Stripe key or dashboard JWT. Exact 'Bearer ' prefix.
+    HeaderApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Opaque 64-hex-character Cosmic Ephemeris key. Use instead of Authorization; a nonempty Bearer credential takes precedence if both are sent.
+x-plan-limits:
+  period: UTC calendar month
+  standard:
+    free: 500
+    basic: 10000
+    pro: 100000
+  nakshatra:
+    pro: 1000
+x-verification-boundary: Seventy-eight deployed calculation contracts are described. The twenty-six R206-R231 electional reliability audits are bounded sampled evidence without hidden weights, rankings, interpretation, prediction, or recommendation. Ashtakavarga is an unreduced calculation-only current contract; specialist review does not alter its technical support status. House ingresses use fixed Equal/Whole Sign reference cusps and exclude Placidus/Porphyry. Natal pattern and planetary-hour classifications are bounded calculation-only methods. Fixed-star activation requires the immutable admitted six-row CC0 catalog; no minor-body contract or runtime is included.

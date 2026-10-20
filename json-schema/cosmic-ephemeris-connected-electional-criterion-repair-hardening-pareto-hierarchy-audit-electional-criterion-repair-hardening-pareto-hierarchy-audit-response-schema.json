@@ -1,0 +1,1425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cosmic-ephemeris/main/json-schema/cosmic-ephemeris-connected-electional-criterion-repair-hardening-pareto-hierarchy-audit-electional-criterion-repair-hardening-pareto-hierarchy-audit-response-schema.json",
+  "title": "ConnectedElectionalCriterionRepairHardeningParetoHierarchyAuditElectionalCriterionRepairHardeningParetoHierarchyAuditResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cosmic-ephemeris-openapi.json#/components/schemas/ConnectedElectionalCriterionRepairHardeningParetoHierarchyAuditElectionalCriterionRepairHardeningParetoHierarchyAuditResponse",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/ElectionalCriterionRepairHardeningParetoHierarchyAuditResponse"
+    },
+    {
+      "$ref": "#/$defs/HistoricalElectionalCriterionRepairHardeningParetoHierarchyAuditElectionalCriterionRepairHardeningParetoHierarchyAuditResponse"
+    }
+  ],
+  "$defs": {
+    "Ayanamsa": {
+      "type": "string",
+      "enum": [
+        "lahiri",
+        "raman",
+        "krishnamurti",
+        "fagan_bradley",
+        "yukteshwar",
+        "sassanian",
+        "true_chitra",
+        "true_revati",
+        "true_pushya",
+        "galactic_center_0_sagittarius",
+        "galactic_alignment_mardyks"
+      ]
+    },
+    "CalculationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "kid",
+        "algorithm",
+        "canonicalization",
+        "input_normalization",
+        "route",
+        "release",
+        "issued_at",
+        "normalized_input_sha256",
+        "result_sha256",
+        "calculation_profile",
+        "service_dataset_versions",
+        "calculation_fingerprint",
+        "verification_uri",
+        "signature"
+      ],
+      "properties": {
+        "schema": {
+          "const": "cosmicephemeris-calculation-receipt-v1"
+        },
+        "kid": {
+          "type": "string"
+        },
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "canonicalization": {
+          "const": "cosmicephemeris-canonical-data-v1"
+        },
+        "input_normalization": {
+          "const": "public-request-canonical-data-v1"
+        },
+        "route": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "normalized_input_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "result_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "calculation_profile": {
+          "type": "object"
+        },
+        "service_dataset_versions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "calculation_fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "verification_uri": {
+          "type": "string",
+          "pattern": "^https://api\\.cosmicephemeris\\.com/\\.well-known/jwks\\.json$"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "ElectionalAspectFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "body_a",
+        "body_b",
+        "aspect",
+        "max_orb_degrees"
+      ],
+      "properties": {
+        "body_a": {
+          "$ref": "#/$defs/PlanetaryEventBody"
+        },
+        "body_b": {
+          "$ref": "#/$defs/PlanetaryEventBody"
+        },
+        "aspect": {
+          "$ref": "#/$defs/PlanetaryEventAspect"
+        },
+        "max_orb_degrees": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 10,
+          "multipleOf": 0.1
+        }
+      }
+    },
+    "ElectionalCriterionRepairHardeningAuditRequest": {
+      "$ref": "#/$defs/ElectionalCriterionRepairLossFrontierAuditRequest"
+    },
+    "ElectionalCriterionRepairHardeningHierarchyNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hardening_profile_id",
+        "repair_ids",
+        "avoidance_by_failure_budget",
+        "pareto_layer",
+        "strictly_dominates_profile_ids",
+        "strictly_dominated_by_profile_ids",
+        "immediately_dominates_profile_ids",
+        "immediately_dominated_by_profile_ids",
+        "incomparable_profile_ids",
+        "longest_chain_from_undominated_count",
+        "longest_chain_to_most_dominated_count"
+      ],
+      "properties": {
+        "hardening_profile_id": {
+          "type": "string",
+          "pattern": "^hardening_profile_[0-9]{3}$"
+        },
+        "repair_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 70,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^repair_[0-9]{3}$"
+          }
+        },
+        "avoidance_by_failure_budget": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/ElectionalCriterionRepairHardeningParetoBudgetPoint"
+          }
+        },
+        "pareto_layer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 69
+        },
+        "strictly_dominates_profile_ids": {
+          "$ref": "#/$defs/HardeningProfileIdSet"
+        },
+        "strictly_dominated_by_profile_ids": {
+          "$ref": "#/$defs/HardeningProfileIdSet"
+        },
+        "immediately_dominates_profile_ids": {
+          "$ref": "#/$defs/HardeningProfileIdSet"
+        },
+        "immediately_dominated_by_profile_ids": {
+          "$ref": "#/$defs/HardeningProfileIdSet"
+        },
+        "incomparable_profile_ids": {
+          "$ref": "#/$defs/HardeningProfileIdSet"
+        },
+        "longest_chain_from_undominated_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 70
+        },
+        "longest_chain_to_most_dominated_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 70
+        }
+      }
+    },
+    "ElectionalCriterionRepairHardeningParetoAuditRequest": {
+      "$ref": "#/$defs/ElectionalCriterionRepairHardeningAuditRequest"
+    },
+    "ElectionalCriterionRepairHardeningParetoBudgetPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unavailable_repair_count",
+        "avoided_worst_case_observation_count"
+      ],
+      "properties": {
+        "unavailable_repair_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "avoided_worst_case_observation_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2016
+        }
+      }
+    },
+    "ElectionalCriterionRepairHardeningParetoHierarchyAuditRequest": {
+      "$ref": "#/$defs/ElectionalCriterionRepairHardeningParetoAuditRequest"
+    },
+    "ElectionalCriterionRepairHardeningParetoHierarchyAuditResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "status",
+        "input",
+        "damage_status",
+        "hardening_status",
+        "pareto_status",
+        "hierarchy_status",
+        "criteria",
+        "samples",
+        "grids",
+        "repairs",
+        "hierarchy_nodes",
+        "containments",
+        "minimal_repair_ids",
+        "maximal_repair_ids",
+        "maximum_antichain_repair_ids",
+        "minimum_chain_cover",
+        "longest_chain_repair_ids",
+        "coverage_status",
+        "coverage_groups",
+        "repair_coverage",
+        "coverage_multiplicity_histogram",
+        "resilience_status",
+        "minimal_failure_coalitions",
+        "repair_loss_resilience_curve",
+        "coverage_summary",
+        "coverage_metadata",
+        "repair_loss_damage_frontier",
+        "resilience_summary",
+        "resilience_metadata",
+        "repair_hardening_candidates",
+        "damage_summary",
+        "damage_metadata",
+        "hardening_profiles",
+        "hardening_pair_relations",
+        "hardening_candidate_relations",
+        "hardening_summary",
+        "hardening_metadata",
+        "hardening_hierarchy_nodes",
+        "hardening_profile_dominances",
+        "pareto_layers",
+        "maximum_antichain_hardening_profile_ids",
+        "minimum_hardening_profile_chain_cover",
+        "longest_dominance_chain_hardening_profile_ids",
+        "pareto_summary",
+        "pareto_metadata",
+        "summary",
+        "fallback",
+        "metadata"
+      ],
+      "properties": {
+        "type": {
+          "const": "electional_criterion_repair_hardening_pareto_hierarchy_audit"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "input": {
+          "$ref": "#/$defs/ElectionalCriterionRepairHardeningParetoHierarchyAuditRequest"
+        },
+        "damage_status": {
+          "$ref": "#/$defs/damage_status"
+        },
+        "hardening_status": {
+          "$ref": "#/$defs/hardening_status"
+        },
+        "pareto_status": {
+          "$ref": "#/$defs/pareto_status"
+        },
+        "hierarchy_status": {
+          "type": "string",
+          "enum": [
+            "indeterminate_no_evaluable_samples",
+            "indeterminate_incomplete_grid_evidence",
+            "no_relaxation_required",
+            "no_new_repair_consequences_observed",
+            "insufficient_hardening_profiles_for_hierarchy",
+            "all_hardening_profiles_pairwise_incomparable",
+            "exact_hardening_profile_dominance_chain_observed",
+            "exact_hardening_profile_dominance_hierarchy_observed"
+          ]
+        },
+        "criteria": {
+          "$ref": "#/$defs/criteria"
+        },
+        "samples": {
+          "$ref": "#/$defs/samples"
+        },
+        "grids": {
+          "$ref": "#/$defs/grids"
+        },
+        "repairs": {
+          "$ref": "#/$defs/repairs"
+        },
+        "hierarchy_nodes": {
+          "$ref": "#/$defs/hierarchy_nodes"
+        },
+        "containments": {
+          "$ref": "#/$defs/containments"
+        },
+        "minimal_repair_ids": {
+          "$ref": "#/$defs/minimal_repair_ids"
+        },
+        "maximal_repair_ids": {
+          "$ref": "#/$defs/maximal_repair_ids"
+        },
+        "maximum_antichain_repair_ids": {
+          "$ref": "#/$defs/maximum_antichain_repair_ids"
+        },
+        "minimum_chain_cover": {
+          "$ref": "#/$defs/minimum_chain_cover"
+        },
+        "longest_chain_repair_ids": {
+          "$ref": "#/$defs/longest_chain_repair_ids"
+        },
+        "coverage_status": {
+          "$ref": "#/$defs/coverage_status"
+        },
+        "coverage_groups": {
+          "$ref": "#/$defs/coverage_groups"
+        },
+        "repair_coverage": {
+          "$ref": "#/$defs/repair_coverage"
+        },
+        "coverage_multiplicity_histogram": {
+          "$ref": "#/$defs/coverage_multiplicity_histogram"
+        },
+        "resilience_status": {
+          "$ref": "#/$defs/resilience_status"
+        },
+        "minimal_failure_coalitions": {
+          "$ref": "#/$defs/minimal_failure_coalitions"
+        },
+        "repair_loss_resilience_curve": {
+          "$ref": "#/$defs/repair_loss_resilience_curve"
+        },
+        "coverage_summary": {
+          "$ref": "#/$defs/coverage_summary"
+        },
+        "coverage_metadata": {
+          "$ref": "#/$defs/coverage_metadata"
+        },
+        "repair_loss_damage_frontier": {
+          "$ref": "#/$defs/repair_loss_damage_frontier"
+        },
+        "resilience_summary": {
+          "$ref": "#/$defs/resilience_summary"
+        },
+        "resilience_metadata": {
+          "$ref": "#/$defs/resilience_metadata"
+        },
+        "repair_hardening_candidates": {
+          "$ref": "#/$defs/repair_hardening_candidates"
+        },
+        "damage_summary": {
+          "$ref": "#/$defs/damage_summary"
+        },
+        "damage_metadata": {
+          "$ref": "#/$defs/damage_metadata"
+        },
+        "hardening_profiles": {
+          "$ref": "#/$defs/hardening_profiles"
+        },
+        "hardening_pair_relations": {
+          "$ref": "#/$defs/hardening_pair_relations"
+        },
+        "hardening_candidate_relations": {
+          "$ref": "#/$defs/hardening_candidate_relations"
+        },
+        "hardening_summary": {
+          "$ref": "#/$defs/hardening_summary"
+        },
+        "hardening_metadata": {
+          "$ref": "#/$defs/hardening_metadata"
+        },
+        "hardening_hierarchy_nodes": {
+          "type": "array",
+          "maxItems": 70,
+          "items": {
+            "$ref": "#/$defs/ElectionalCriterionRepairHardeningHierarchyNode"
+          }
+        },
+        "hardening_profile_dominances": {
+          "type": "array",
+          "maxItems": 2415,
+          "items": {
+            "$ref": "#/$defs/ElectionalCriterionRepairHardeningProfileDominance"
+          }
+        },
+        "pareto_layers": {
+          "type": "array",
+          "maxItems": 70,
+          "items": {
+            "$ref": "#/$defs/ElectionalCriterionRepairHardeningParetoLayer"
+          }
+        },
+        "maximum_antichain_hardening_profile_ids": {
+          "type": "array",
+          "maxItems": 70,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^hardening_profile_[0-9]{3}$"
+          }
+        },
+        "minimum_hardening_profile_chain_cover": {
+          "type": "array",
+          "maxItems": 70,
+          "items": {
+            "$ref": "#/$defs/ElectionalCriterionRepairHardeningProfileChain"
+          }
+        },
+        "longest_dominance_chain_hardening_profile_ids": {
+          "type": "array",
+          "maxItems": 70,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^hardening_profile_[0-9]{3}$"
+          }
+        },
+        "pareto_summary": {
+          "$ref": "#/$defs/summary"
+        },
+        "pareto_metadata": {
+          "$ref": "#/$defs/metadata"
+        },
+        "summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "returned_hardening_profile_count",
+            "returned_strict_dominance_count",
+            "returned_cover_relation_count",
+            "returned_pareto_layer_count",
+            "pareto_frontier_profile_count",
+            "maximum_chain_length",
+            "maximum_antichain_size",
+            "minimum_chain_cover_count",
+            "returned_hierarchy_relation_reference_count",
+            "cover_relation_transitive_reduction_verified",
+            "pareto_layers_partition_profiles_verified",
+            "maximum_antichain_pairwise_incomparable_verified",
+            "minimum_chain_cover_partitions_profiles_verified"
+          ],
+          "properties": {
+            "returned_hardening_profile_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 70
+            },
+            "returned_strict_dominance_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2415
+            },
+            "returned_cover_relation_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2415
+            },
+            "returned_pareto_layer_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 70
+            },
+            "pareto_frontier_profile_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 70
+            },
+            "maximum_chain_length": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 70
+            },
+            "maximum_antichain_size": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 70
+            },
+            "minimum_chain_cover_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 70
+            },
+            "returned_hierarchy_relation_reference_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 24150
+            },
+            "cover_relation_transitive_reduction_verified": {
+              "const": true
+            },
+            "pareto_layers_partition_profiles_verified": {
+              "const": true
+            },
+            "maximum_antichain_pairwise_incomparable_verified": {
+              "const": true
+            },
+            "minimum_chain_cover_partitions_profiles_verified": {
+              "const": true
+            }
+          }
+        },
+        "fallback": {
+          "$ref": "#/$defs/fallback"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model",
+            "ephemeris",
+            "maximum_interval_days",
+            "maximum_chart_evaluations",
+            "maximum_criterion_count",
+            "maximum_hardening_profile_count",
+            "maximum_strict_dominance_count",
+            "maximum_cover_relation_count",
+            "maximum_pareto_layer_count",
+            "maximum_hierarchy_relation_reference_count",
+            "maximum_hierarchy_comparison_count",
+            "dominance_direction",
+            "cover_relation_definition",
+            "pareto_layer_definition",
+            "width_definition",
+            "matching_algorithm",
+            "dilworth_identity_verified",
+            "equivalent_candidates_collapsed_to_profiles",
+            "all_hardening_profile_pairs_considered",
+            "exact_integer_counts_used",
+            "weights_applied",
+            "floating_point_comparison",
+            "repairs_ranked",
+            "chart_recalculation_for_hierarchy_analysis",
+            "continuous_time_guarantee",
+            "causal_hardening_claim",
+            "recommendations",
+            "interpretations",
+            "predictions",
+            "statistical_confidence",
+            "request_time_network"
+          ],
+          "properties": {
+            "model": {
+              "const": "cosmicephemeris-electional-criterion-repair-hardening-pareto-hierarchy-audit-v1"
+            },
+            "ephemeris": {
+              "const": "JPL-DE440"
+            },
+            "maximum_interval_days": {
+              "const": 7
+            },
+            "maximum_chart_evaluations": {
+              "const": 672
+            },
+            "maximum_criterion_count": {
+              "const": 8
+            },
+            "maximum_hardening_profile_count": {
+              "const": 70
+            },
+            "maximum_strict_dominance_count": {
+              "const": 2415
+            },
+            "maximum_cover_relation_count": {
+              "const": 2415
+            },
+            "maximum_pareto_layer_count": {
+              "const": 70
+            },
+            "maximum_hierarchy_relation_reference_count": {
+              "const": 24150
+            },
+            "maximum_hierarchy_comparison_count": {
+              "const": 343000
+            },
+            "dominance_direction": {
+              "const": "greater_avoided_loss_profile_to_strictly_dominated_profile"
+            },
+            "cover_relation_definition": {
+              "const": "strict_dominance_with_no_returned_intermediate_profile"
+            },
+            "pareto_layer_definition": {
+              "const": "successive_undominated_frontiers_after_removing_prior_layers"
+            },
+            "width_definition": {
+              "const": "maximum_pairwise_incomparable_hardening_profile_count"
+            },
+            "matching_algorithm": {
+              "const": "deterministic_maximum_bipartite_matching_on_strict_dominance"
+            },
+            "dilworth_identity_verified": {
+              "const": true
+            },
+            "equivalent_candidates_collapsed_to_profiles": {
+              "const": true
+            },
+            "all_hardening_profile_pairs_considered": {
+              "const": true
+            },
+            "exact_integer_counts_used": {
+              "const": true
+            },
+            "weights_applied": {
+              "const": false
+            },
+            "floating_point_comparison": {
+              "const": false
+            },
+            "repairs_ranked": {
+              "const": false
+            },
+            "chart_recalculation_for_hierarchy_analysis": {
+              "const": false
+            },
+            "continuous_time_guarantee": {
+              "const": false
+            },
+            "causal_hardening_claim": {
+              "const": false
+            },
+            "recommendations": {
+              "const": false
+            },
+            "interpretations": {
+              "const": false
+            },
+            "predictions": {
+              "const": false
+            },
+            "statistical_confidence": {
+              "const": false
+            },
+            "request_time_network": {
+              "const": false
+            }
+          }
+        },
+        "receipt": {
+          "$ref": "#/$defs/CalculationReceipt"
+        }
+      }
+    },
+    "ElectionalCriterionRepairHardeningParetoLayer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "pareto_layer",
+        "hardening_profile_ids",
+        "hardening_profile_count"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^pareto_layer_[0-9]{3}$"
+        },
+        "pareto_layer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 69
+        },
+        "hardening_profile_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 70,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^hardening_profile_[0-9]{3}$"
+          }
+        },
+        "hardening_profile_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 70
+        }
+      }
+    },
+    "ElectionalCriterionRepairHardeningProfileChain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "hardening_profile_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^hardening_chain_[0-9]{3}$"
+        },
+        "hardening_profile_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 70,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^hardening_profile_[0-9]{3}$"
+          }
+        }
+      }
+    },
+    "ElectionalCriterionRepairHardeningProfileDominance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dominant_hardening_profile_id",
+        "dominated_hardening_profile_id",
+        "strict_improvement_failure_budgets",
+        "equal_avoidance_failure_budgets",
+        "first_strict_improvement_failure_budget",
+        "is_cover_relation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^hardening_dominance_[0-9]{4}$"
+        },
+        "dominant_hardening_profile_id": {
+          "type": "string",
+          "pattern": "^hardening_profile_[0-9]{3}$"
+        },
+        "dominated_hardening_profile_id": {
+          "type": "string",
+          "pattern": "^hardening_profile_[0-9]{3}$"
+        },
+        "strict_improvement_failure_budgets": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          }
+        },
+        "equal_avoidance_failure_budgets": {
+          "type": "array",
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          }
+        },
+        "first_strict_improvement_failure_budget": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "is_cover_relation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ElectionalCriterionRepairLossFrontierAuditRequest": {
+      "$ref": "#/$defs/ElectionalCriterionRepairResilienceAuditRequest"
+    },
+    "ElectionalCriterionRepairResilienceAuditRequest": {
+      "$ref": "#/$defs/ElectionalResolutionAuditRequest"
+    },
+    "ElectionalFilters": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "moon_signs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ElectionalSignName"
+          }
+        },
+        "moon_phase_sectors": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/MoonPhaseSector"
+          }
+        },
+        "mercury_motion": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "retrograde"
+          ]
+        },
+        "ascendant_signs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ElectionalSignName"
+          }
+        },
+        "aspects": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/ElectionalAspectFilter"
+          }
+        }
+      }
+    },
+    "ElectionalResolutionAuditRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start_utc",
+        "end_utc",
+        "location",
+        "profile",
+        "filters"
+      ],
+      "properties": {
+        "start_utc": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+        },
+        "end_utc": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+        },
+        "location": {
+          "$ref": "#/$defs/GeographicLocation"
+        },
+        "profile": {
+          "$ref": "#/$defs/ElectionalRobustnessAuditProfile"
+        },
+        "filters": {
+          "$ref": "#/$defs/ElectionalFilters"
+        }
+      }
+    },
+    "ElectionalRobustnessAuditProfile": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zodiac"
+          ],
+          "properties": {
+            "zodiac": {
+              "const": "tropical"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zodiac",
+            "ayanamsa"
+          ],
+          "properties": {
+            "zodiac": {
+              "const": "sidereal"
+            },
+            "ayanamsa": {
+              "$ref": "#/$defs/Ayanamsa"
+            }
+          }
+        }
+      ]
+    },
+    "ElectionalSignName": {
+      "type": "string",
+      "enum": [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces"
+      ]
+    },
+    "GeographicLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "description": "Geographic coordinates in decimal degrees. The server rejects exactly -90 and +90 latitude because angles and houses are undefined at the poles.",
+      "properties": {
+        "lat": {
+          "$ref": "#/$defs/Latitude"
+        },
+        "lon": {
+          "$ref": "#/$defs/Longitude"
+        }
+      }
+    },
+    "HardeningProfileIdSet": {
+      "type": "array",
+      "maxItems": 69,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^hardening_profile_[0-9]{3}$"
+      }
+    },
+    "HistoricalClock": {
+      "type": "string",
+      "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?(?![\\s\\S])",
+      "description": "Explicit HH:MM[:SS]; whole seconds only, no leap seconds. Normalized helper output includes seconds."
+    },
+    "HistoricalDate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "era",
+        "month",
+        "day",
+        "calendar"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2500
+        },
+        "era": {
+          "enum": [
+            "BCE",
+            "CE"
+          ],
+          "description": "Display BCE (BC) / CE (AD); API values remain BCE / CE. No year zero."
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "calendar": {
+          "enum": [
+            "proleptic_gregorian",
+            "proleptic_julian"
+          ],
+          "description": "Explicit choice; applies the selected calendar rules throughout history without a regional adoption switch."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "era": {
+                "const": "BCE"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "maximum": 1000
+              }
+            }
+          }
+        }
+      ],
+      "description": "Explicit civil date, 1000 BCE (BC)–2500 CE (AD); no year zero. Calendar validity is checked by the server. Available only on documented connected historical operations, with explicit UT1/fixed-offset conventions."
+    },
+    "HistoricalDateTime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "time",
+        "timezone"
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/$defs/HistoricalDate"
+        },
+        "time": {
+          "$ref": "#/$defs/HistoricalClock"
+        },
+        "timezone": {
+          "$ref": "#/$defs/HistoricalTimezone"
+        }
+      },
+      "description": "Shared historical input contract; parsing alone does not enable a calculation route. Derived calculation records can include fractional seconds and are not this input type."
+    },
+    "HistoricalElectionalCriterionRepairHardeningParetoHierarchyAuditElectionalCriterionRepairHardeningParetoHierarchyAuditResponse": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "schema",
+        "status",
+        "type",
+        "input",
+        "result",
+        "metadata"
+      ],
+      "properties": {
+        "schema": {
+          "const": "cosmicephemeris-historical-calculation-v1"
+        },
+        "status": {
+          "const": "historical"
+        },
+        "type": {
+          "const": "electional-criterion-repair-hardening-pareto-hierarchy-audit"
+        },
+        "input": {
+          "$ref": "#/$defs/HistoricalElectionalCriterionRepairHardeningParetoHierarchyAuditRequest"
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Complete historical calculation adapter result. Times are explicit UT1 date records, never UTC strings; derived times may include fractional seconds and years outside the input range."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "time_standard",
+            "historical_accuracy_certified",
+            "warnings"
+          ],
+          "properties": {
+            "time_standard": {
+              "const": "UT1"
+            },
+            "historical_accuracy_certified": {
+              "const": false
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "HistoricalElectionalCriterionRepairHardeningParetoHierarchyAuditRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "location",
+        "profile",
+        "filters"
+      ],
+      "properties": {
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "lat",
+            "lon"
+          ],
+          "description": "Geographic coordinates in decimal degrees. The server rejects exactly -90 and +90 latitude because angles and houses are undefined at the poles.",
+          "properties": {
+            "lat": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": -90,
+                  "exclusiveMaximum": 90
+                },
+                {
+                  "type": "string",
+                  "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+                }
+              ],
+              "description": "WGS84 decimal latitude. JSON numbers are recommended; numeric strings are accepted by the current engine, then checked for finiteness/range. Exact poles and undefined Ascendant geometry return 400; supported successful latitude is strictly between -90 and 90. Boolean/null/object/array coordinates are invalid."
+            },
+            "lon": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
+                },
+                {
+                  "type": "string",
+                  "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+                }
+              ],
+              "description": "WGS84 decimal longitude, east positive, within [-180,180]. JSON numbers are recommended; numeric strings are accepted then checked for finiteness/range."
+            }
+          }
+        },
+        "profile": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "zodiac"
+              ],
+              "properties": {
+                "zodiac": {
+                  "const": "tropical"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "zodiac",
+                "ayanamsa"
+              ],
+              "properties": {
+                "zodiac": {
+                  "const": "sidereal"
+                },
+                "ayanamsa": {
+                  "type": "string",
+                  "enum": [
+                    "lahiri",
+                    "raman",
+                    "krishnamurti",
+                    "fagan_bradley",
+                    "yukteshwar",
+                    "sassanian",
+                    "true_chitra",
+                    "true_revati",
+                    "true_pushya",
+                    "galactic_center_0_sagittarius",
+                    "galactic_alignment_mardyks"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "moon_signs": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Aries",
+                  "Taurus",
+                  "Gemini",
+                  "Cancer",
+                  "Leo",
+                  "Virgo",
+                  "Libra",
+                  "Scorpio",
+                  "Sagittarius",
+                  "Capricorn",
+                  "Aquarius",
+                  "Pisces"
+                ]
+              }
+            },
+            "moon_phase_sectors": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 8,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "new_moon",
+                  "waxing_crescent",
+                  "first_quarter",
+                  "waxing_gibbous",
+                  "full_moon",
+                  "waning_gibbous",
+                  "last_quarter",
+                  "waning_crescent"
+                ]
+              }
+            },
+            "mercury_motion": {
+              "type": "string",
+              "enum": [
+                "direct",
+                "retrograde"
+              ]
+            },
+            "ascendant_signs": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 12,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Aries",
+                  "Taurus",
+                  "Gemini",
+                  "Cancer",
+                  "Leo",
+                  "Virgo",
+                  "Libra",
+                  "Scorpio",
+                  "Sagittarius",
+                  "Capricorn",
+                  "Aquarius",
+                  "Pisces"
+                ]
+              }
+            },
+            "aspects": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "body_a",
+                  "body_b",
+                  "aspect",
+                  "max_orb_degrees"
+                ],
+                "properties": {
+                  "body_a": {
+                    "type": "string",
+                    "enum": [
+                      "sun",
+                      "moon",
+                      "mercury",
+                      "venus",
+                      "mars",
+                      "jupiter",
+                      "saturn",
+                      "uranus",
+                      "neptune",
+                      "pluto"
+                    ]
+                  },
+                  "body_b": {
+                    "type": "string",
+                    "enum": [
+                      "sun",
+                      "moon",
+                      "mercury",
+                      "venus",
+                      "mars",
+                      "jupiter",
+                      "saturn",
+                      "uranus",
+                      "neptune",
+                      "pluto"
+                    ]
+                  },
+                  "aspect": {
+                    "type": "string",
+                    "enum": [
+                      "conjunction",
+                      "sextile",
+                      "square",
+                      "trine",
+                      "opposition"
+                    ]
+                  },
+                  "max_orb_degrees": {
+                    "type": "number",
+                    "minimum": 0.5,
+                    "maximum": 10,
+                    "multipleOf": 0.1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "start": {
+          "$ref": "#/$defs/HistoricalDateTime"
+        },
+        "end": {
+          "$ref": "#/$defs/HistoricalDateTime"
+        }
+      },
+      "description": "Explicit historical mode, 1000 BCE (BC)–2500 CE (AD). No year zero, implicit calendar, UTC or IANA zone. Preserve tool-specific mathematical, geographic and search limits; calendar/time conventions and estimated Delta-T are not certified historical accuracy."
+    },
+    "HistoricalTimezone": {
+      "type": "string",
+      "pattern": "^UT1(?:[+-](?:0[0-9]|1[0-3]):[0-5][0-9](?::[0-5][0-9])?|[+-]14:00(?::00)?)?(?![\\s\\S])",
+      "description": "Explicit UT1 or fixed offset UT1+/-HH:MM[:SS], within 14 hours. Local clock minus offset yields UT1, not UTC. No IANA timezone inference. Original offset spelling is preserved."
+    },
+    "Latitude": {
+      "anyOf": [
+        {
+          "type": "number",
+          "exclusiveMinimum": -90,
+          "exclusiveMaximum": 90
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+        }
+      ],
+      "description": "WGS84 decimal latitude. JSON numbers are recommended; numeric strings are accepted by the current engine, then checked for finiteness/range. Exact poles and undefined Ascendant geometry return 400; supported successful latitude is strictly between -90 and 90. Boolean/null/object/array coordinates are invalid."
+    },
+    "Longitude": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+        }
+      ],
+      "description": "WGS84 decimal longitude, east positive, within [-180,180]. JSON numbers are recommended; numeric strings are accepted then checked for finiteness/range."
+    },
+    "MoonPhaseSector": {
+      "type": "string",
+      "enum": [
+        "new_moon",
+        "waxing_crescent",
+        "first_quarter",
+        "waxing_gibbous",
+        "full_moon",
+        "waning_gibbous",
+        "last_quarter",
+        "waning_crescent"
+      ]
+    },
+    "PlanetaryEventAspect": {
+      "type": "string",
+      "enum": [
+        "conjunction",
+        "sextile",
+        "square",
+        "trine",
+        "opposition"
+      ]
+    },
+    "PlanetaryEventBody": {
+      "type": "string",
+      "enum": [
+        "sun",
+        "moon",
+        "mercury",
+        "venus",
+        "mars",
+        "jupiter",
+        "saturn",
+        "uranus",
+        "neptune",
+        "pluto"
+      ]
+    }
+  }
+}

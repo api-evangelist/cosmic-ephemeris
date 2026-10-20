@@ -1,0 +1,21 @@
+generated: '2026-10-20'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://cosmicephemeris.com/pricing.html
+sources:
+- https://cosmicephemeris.com/pricing.html
+- https://cosmicephemeris.com/guides/astrology-api-pricing-models.html
+name: Cosmic Ephemeris pricing
+audience: developer-api
+pricing_basis: per-seat
+plans:
+- name: Free
+  price_text: $0 /month
+  price: 0
+- name: Developer
+  price_text: $9.99 /month
+  price: 9.99
+- name: Pro
+  price_text: $19.99 /month
+  price: 19.99
+docs: https://cosmicephemeris.com/pricing.html

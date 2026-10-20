@@ -1,0 +1,12 @@
+generated: '2026-10-20'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/cosmic-ephemeris-openapi.json
+skills:
+- file: skills/cosmic-ephemeris-calculate-full-birth-chart.md
+  name: cosmic-ephemeris-calculate-full-birth-chart
+  api: openapi/cosmic-ephemeris-openapi.json
+  operations:
+  - calculateBirthChart
+  - calculateAspects
+  - calculateHouses

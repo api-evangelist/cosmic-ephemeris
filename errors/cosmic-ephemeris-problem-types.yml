@@ -1,0 +1,103 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/cosmic-ephemeris-openapi.json
+format: custom
+envelope:
+  media_type: application/json
+  schema: Error
+coverage:
+  operations: 78
+  statuses_declared: 11
+problems:
+- status: 400
+  title: Bad Request
+  description: Invalid request, malformed JSON, out-of-range date/location, unknown model, invalid timezone or ambiguous/nonexistent
+    clock-change time. Inv
+  operations: 78
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 401
+  title: Unauthorized
+  description: Missing, invalid, revoked API key or unavailable activated key owner. Dashboard cookies do not authenticate
+    calculation routes.
+  operations: 78
+  media_types:
+  - application/json
+  schema: Error
+- status: 402
+  title: Payment Required
+  description: Timeline requires effective Pro entitlement; admission is refused before quota reservation.
+  operations: 1
+  media_types:
+  - application/json
+  schema: Error
+- status: 403
+  title: Forbidden
+  description: Origin not allowed by production CORS policy. Server-to-server requests can omit Origin.
+  operations: 78
+  media_types:
+  - application/json
+  schema: Error
+- status: 404
+  title: Not Found
+  description: Wrong/case-variant/noncanonical or trailing-slash route; public paths have no version prefix.
+  operations: 26
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 413
+  title: Content Too Large
+  description: Request exceeds the body limit; gateway JSON is capped at 128 KiB. Edge failures may be HTML.
+  operations: 25
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 429
+  title: Too Many Requests
+  description: 'Monthly quota exhausted, per-user two-request concurrency reached, or nginx rate/connection admission
+    refused. Retry-After: 2 is sent for ap'
+  operations: 78
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 500
+  title: Internal Server Error
+  description: Bounded gateway/database/internal failure. An admitted attempt can still consume quota.
+  operations: 25
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 502
+  title: Bad Gateway
+  description: Engine unavailable, unsuccessful internal server response or invalid upstream JSON. No engine internals
+    are exposed.
+  operations: 78
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 503
+  title: Service Unavailable
+  description: 'Four-request global calculation pool full (Retry-After: 2), maintenance or upstream service unavailable.'
+  operations: 78
+  media_types:
+  - application/json
+  - text/html
+  schema: Error
+- status: 504
+  title: Gateway Timeout
+  description: 'Application engine timeout: 15 seconds normally; planetary events, house ingresses, aspect windows,
+    event calendar, eclipse geometry, electi'
+  operations: 78
+  media_types:
+  - application/json
+  - text/html
+  schema: Error

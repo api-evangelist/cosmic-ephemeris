@@ -1,0 +1,1446 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cosmic-ephemeris/main/json-schema/cosmic-ephemeris-connected-vimshottari-response-schema.json",
+  "title": "ConnectedVimshottariResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cosmic-ephemeris-openapi.json#/components/schemas/ConnectedVimshottariResponse",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/VimshottariResponseDepth2"
+    },
+    {
+      "$ref": "#/$defs/VimshottariResponseDepth3"
+    },
+    {
+      "$ref": "#/$defs/VimshottariResponseDepth4"
+    },
+    {
+      "$ref": "#/$defs/HistoricalVimshottariResponse"
+    }
+  ],
+  "$defs": {
+    "Ayanamsa": {
+      "type": "string",
+      "enum": [
+        "lahiri",
+        "raman",
+        "krishnamurti",
+        "fagan_bradley",
+        "yukteshwar",
+        "sassanian",
+        "true_chitra",
+        "true_revati",
+        "true_pushya",
+        "galactic_center_0_sagittarius",
+        "galactic_alignment_mardyks"
+      ]
+    },
+    "AyanamsaResult": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Ayanamsa"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "null for tropical charts; selected normalized ayanamsa for sidereal charts."
+    },
+    "DashaAntardashaDepth3": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        },
+        "subperiods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaSubperiod"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth",
+        "subperiods"
+      ],
+      "additionalProperties": false
+    },
+    "DashaAntardashaDepth4": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        },
+        "subperiods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaPratyantardashaDepth4"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth",
+        "subperiods"
+      ],
+      "additionalProperties": false
+    },
+    "DashaLord": {
+      "type": "string",
+      "enum": [
+        "ketu",
+        "venus",
+        "sun",
+        "moon",
+        "mars",
+        "rahu",
+        "jupiter",
+        "saturn",
+        "mercury"
+      ]
+    },
+    "DashaPeriod": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "integer",
+          "enum": [
+            7,
+            20,
+            6,
+            10,
+            18,
+            16,
+            19,
+            17
+          ]
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        },
+        "subperiods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaSubperiod"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth",
+        "subperiods"
+      ],
+      "additionalProperties": false
+    },
+    "DashaPeriodDepth3": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "integer",
+          "enum": [
+            7,
+            20,
+            6,
+            10,
+            18,
+            16,
+            19,
+            17
+          ]
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        },
+        "subperiods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaAntardashaDepth3"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth",
+        "subperiods"
+      ],
+      "additionalProperties": false
+    },
+    "DashaPeriodDepth4": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "integer",
+          "enum": [
+            7,
+            20,
+            6,
+            10,
+            18,
+            16,
+            19,
+            17
+          ]
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        },
+        "subperiods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaAntardashaDepth4"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth",
+        "subperiods"
+      ],
+      "additionalProperties": false
+    },
+    "DashaPratyantardashaDepth4": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        },
+        "subperiods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaSookshmaPeriod"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth",
+        "subperiods"
+      ],
+      "additionalProperties": false,
+      "description": "One third-level period with exactly nine fourth-level sookshma-dasha children."
+    },
+    "DashaSookshmaPeriod": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "lord",
+        "start_utc",
+        "end_utc",
+        "active_at_birth"
+      ],
+      "additionalProperties": false,
+      "description": "Fourth-level leaf. Exact duration is end_utc minus start_utc; the redundant display-only years field is omitted to preserve the existing 1 MiB response ceiling."
+    },
+    "DashaSubperiod": {
+      "type": "object",
+      "properties": {
+        "lord": {
+          "$ref": "#/$defs/DashaLord"
+        },
+        "years": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "start_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "end_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "active_at_birth": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "lord",
+        "years",
+        "start_utc",
+        "end_utc",
+        "active_at_birth"
+      ],
+      "additionalProperties": false
+    },
+    "Date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^(?:18[0-9]{2}|19[0-9]{2}|2[01][0-9]{2}|2200)-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$",
+      "description": "Valid Gregorian YYYY-MM-DD local civil date, inclusive 1800-01-01 through 2200-12-31. Calendar validity and timezone conversion are checked by the server."
+    },
+    "HistoricalBirthInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "time",
+        "timezone",
+        "lat",
+        "lon"
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/$defs/HistoricalDate"
+        },
+        "time": {
+          "$ref": "#/$defs/HistoricalClock"
+        },
+        "timezone": {
+          "$ref": "#/$defs/HistoricalTimezone"
+        },
+        "lat": {
+          "type": "number",
+          "exclusiveMinimum": -90,
+          "exclusiveMaximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "exclusiveMaximum": 180
+        }
+      }
+    },
+    "HistoricalClock": {
+      "type": "string",
+      "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?(?![\\s\\S])",
+      "description": "Explicit HH:MM[:SS]; whole seconds only, no leap seconds. Normalized helper output includes seconds."
+    },
+    "HistoricalDate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "era",
+        "month",
+        "day",
+        "calendar"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2500
+        },
+        "era": {
+          "enum": [
+            "BCE",
+            "CE"
+          ],
+          "description": "Display BCE (BC) / CE (AD); API values remain BCE / CE. No year zero."
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "calendar": {
+          "enum": [
+            "proleptic_gregorian",
+            "proleptic_julian"
+          ],
+          "description": "Explicit choice; applies the selected calendar rules throughout history without a regional adoption switch."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "era": {
+                "const": "BCE"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "maximum": 1000
+              }
+            }
+          }
+        }
+      ],
+      "description": "Explicit civil date, 1000 BCE (BC)–2500 CE (AD); no year zero. Calendar validity is checked by the server. Available only on documented connected historical operations, with explicit UT1/fixed-offset conventions."
+    },
+    "HistoricalTimezone": {
+      "type": "string",
+      "pattern": "^UT1(?:[+-](?:0[0-9]|1[0-3]):[0-5][0-9](?::[0-5][0-9])?|[+-]14:00(?::00)?)?(?![\\s\\S])",
+      "description": "Explicit UT1 or fixed offset UT1+/-HH:MM[:SS], within 14 hours. Local clock minus offset yields UT1, not UTC. No IANA timezone inference. Original offset spelling is preserved."
+    },
+    "HistoricalVimshottariRequest": {
+      "type": "object",
+      "properties": {
+        "birth": {
+          "$ref": "#/$defs/HistoricalBirthInput"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/Ayanamsa",
+          "default": "lahiri"
+        },
+        "depth": {
+          "type": "integer",
+          "enum": [
+            2,
+            3,
+            4
+          ],
+          "default": 2,
+          "description": "Only 2, 3, or 4; no null, string or boolean. Explicit 2 is output-identical to omission."
+        }
+      },
+      "required": [
+        "birth"
+      ],
+      "additionalProperties": false,
+      "description": "Explicit historical mode, 1000 BCE (BC)–2500 CE (AD). No year zero, implicit calendar, UTC or IANA zone. Preserve tool-specific mathematical, geographic and search limits; calendar/time conventions and estimated Delta-T are not certified historical accuracy."
+    },
+    "HistoricalVimshottariResponse": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "schema",
+        "status",
+        "type",
+        "input",
+        "result",
+        "metadata"
+      ],
+      "properties": {
+        "schema": {
+          "const": "cosmicephemeris-historical-calculation-v1"
+        },
+        "status": {
+          "const": "historical"
+        },
+        "type": {
+          "const": "vimshottari"
+        },
+        "input": {
+          "$ref": "#/$defs/HistoricalVimshottariRequest"
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Complete historical calculation adapter result. Times are explicit UT1 date records, never UTC strings; derived times may include fractional seconds and years outside the input range."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "time_standard",
+            "historical_accuracy_certified",
+            "warnings"
+          ],
+          "properties": {
+            "time_standard": {
+              "const": "UT1"
+            },
+            "historical_accuracy_certified": {
+              "const": false
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "NormalizedBirth": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "$ref": "#/$defs/Date"
+        },
+        "time": {
+          "$ref": "#/$defs/Time"
+        },
+        "timezone": {
+          "$ref": "#/$defs/Timezone"
+        },
+        "lat": {
+          "type": "number",
+          "exclusiveMinimum": -90,
+          "exclusiveMaximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "zodiac": {
+          "$ref": "#/$defs/Zodiac"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/AyanamsaResult"
+        }
+      },
+      "required": [
+        "date",
+        "time",
+        "timezone",
+        "lat",
+        "lon",
+        "zodiac",
+        "ayanamsa"
+      ],
+      "additionalProperties": true,
+      "description": "Synastry normalizes numeric coordinates, zodiac and ayanamsa. Supplied timezone is echoed (including null/empty string); omitted timezone is UTC."
+    },
+    "Time": {
+      "type": "string",
+      "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$",
+      "description": "HH:MM or HH:MM:SS; no offset in this field. Use timezone to select the civil-time zone."
+    },
+    "Timezone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "IANA timezone name (for example America/New_York). Omission, null, or empty string means UTC for a birth input. Nonexistent or ambiguous local clock-change times return 400; provide the known UTC date/time with timezone UTC instead."
+    },
+    "UtcTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$",
+      "description": "Normalized UTC timestamp; fractional seconds may be present."
+    },
+    "VimshottariMetadata": {
+      "type": "object",
+      "properties": {
+        "calculation_status": {
+          "type": "string",
+          "const": "current"
+        },
+        "practitioner_review": {
+          "type": "string",
+          "const": "not_completed"
+        },
+        "frame": {
+          "type": "string",
+          "const": "apparent_geocentric_sidereal_retained_nutation"
+        },
+        "node_model": {
+          "type": "string",
+          "const": "mean_ascending_and_opposite_descending"
+        },
+        "classification_precision": {
+          "type": "string",
+          "const": "unrounded_binary64"
+        },
+        "interpretations": {
+          "type": "boolean",
+          "const": false
+        },
+        "year_length": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "const": "julian_365_25_days"
+            },
+            "days": {
+              "type": "number",
+              "const": 365.25
+            },
+            "seconds": {
+              "type": "number",
+              "const": 31557600
+            }
+          },
+          "required": [
+            "name",
+            "days",
+            "seconds"
+          ],
+          "additionalProperties": false
+        },
+        "interval": {
+          "type": "string",
+          "const": "[start_utc,end_utc)"
+        },
+        "timestamp_resolution": {
+          "type": "string",
+          "const": "microsecond"
+        },
+        "birth_balance_rounding": {
+          "type": "string",
+          "const": "elapsed_duration_floored_to_microseconds"
+        },
+        "cycle_anchor": {
+          "type": "string",
+          "const": "start_of_birth_mahadasha"
+        },
+        "period_timestamps": {
+          "type": "string",
+          "const": "theoretical_offsets_may_extend_beyond_birth_ephemeris_window_no_ephemeris_extrapolation"
+        }
+      },
+      "required": [
+        "calculation_status",
+        "practitioner_review",
+        "frame",
+        "node_model",
+        "classification_precision",
+        "interpretations",
+        "year_length",
+        "interval",
+        "timestamp_resolution",
+        "birth_balance_rounding",
+        "cycle_anchor",
+        "period_timestamps"
+      ],
+      "additionalProperties": false
+    },
+    "VimshottariMetadataDepth3": {
+      "type": "object",
+      "properties": {
+        "calculation_status": {
+          "type": "string",
+          "const": "current"
+        },
+        "practitioner_review": {
+          "type": "string",
+          "const": "not_completed"
+        },
+        "frame": {
+          "type": "string",
+          "const": "apparent_geocentric_sidereal_retained_nutation"
+        },
+        "node_model": {
+          "type": "string",
+          "const": "mean_ascending_and_opposite_descending"
+        },
+        "classification_precision": {
+          "type": "string",
+          "const": "unrounded_binary64"
+        },
+        "interpretations": {
+          "type": "boolean",
+          "const": false
+        },
+        "year_length": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "const": "julian_365_25_days"
+            },
+            "days": {
+              "type": "number",
+              "const": 365.25
+            },
+            "seconds": {
+              "type": "number",
+              "const": 31557600
+            }
+          },
+          "required": [
+            "name",
+            "days",
+            "seconds"
+          ],
+          "additionalProperties": false
+        },
+        "interval": {
+          "type": "string",
+          "const": "[start_utc,end_utc)"
+        },
+        "timestamp_resolution": {
+          "type": "string",
+          "const": "microsecond"
+        },
+        "birth_balance_rounding": {
+          "type": "string",
+          "const": "elapsed_duration_floored_to_microseconds"
+        },
+        "cycle_anchor": {
+          "type": "string",
+          "const": "start_of_birth_mahadasha"
+        },
+        "period_timestamps": {
+          "type": "string",
+          "const": "theoretical_offsets_may_extend_beyond_birth_ephemeris_window_no_ephemeris_extrapolation"
+        },
+        "depth": {
+          "type": "integer",
+          "const": 3
+        },
+        "levels": {
+          "type": "array",
+          "const": [
+            "mahadasha",
+            "antardasha",
+            "pratyantardasha"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "period_counts": {
+          "type": "object",
+          "properties": {
+            "mahadasha": {
+              "type": "integer",
+              "const": 9
+            },
+            "antardasha": {
+              "type": "integer",
+              "const": 81
+            },
+            "pratyantardasha": {
+              "type": "integer",
+              "const": 729
+            }
+          },
+          "required": [
+            "mahadasha",
+            "antardasha",
+            "pratyantardasha"
+          ],
+          "additionalProperties": false
+        },
+        "duration_arithmetic": {
+          "type": "string",
+          "const": "exact_integer_microseconds_proportional_parent_duration"
+        }
+      },
+      "required": [
+        "calculation_status",
+        "practitioner_review",
+        "frame",
+        "node_model",
+        "classification_precision",
+        "interpretations",
+        "year_length",
+        "interval",
+        "timestamp_resolution",
+        "birth_balance_rounding",
+        "cycle_anchor",
+        "period_timestamps",
+        "depth",
+        "levels",
+        "period_counts",
+        "duration_arithmetic"
+      ],
+      "additionalProperties": false
+    },
+    "VimshottariMetadataDepth4": {
+      "type": "object",
+      "properties": {
+        "calculation_status": {
+          "$ref": "#/$defs/calculation_status"
+        },
+        "practitioner_review": {
+          "$ref": "#/$defs/practitioner_review"
+        },
+        "frame": {
+          "$ref": "#/$defs/frame"
+        },
+        "node_model": {
+          "$ref": "#/$defs/node_model"
+        },
+        "classification_precision": {
+          "$ref": "#/$defs/classification_precision"
+        },
+        "interpretations": {
+          "$ref": "#/$defs/interpretations"
+        },
+        "year_length": {
+          "$ref": "#/$defs/year_length"
+        },
+        "interval": {
+          "$ref": "#/$defs/interval"
+        },
+        "timestamp_resolution": {
+          "$ref": "#/$defs/timestamp_resolution"
+        },
+        "birth_balance_rounding": {
+          "$ref": "#/$defs/birth_balance_rounding"
+        },
+        "cycle_anchor": {
+          "$ref": "#/$defs/cycle_anchor"
+        },
+        "period_timestamps": {
+          "$ref": "#/$defs/period_timestamps"
+        },
+        "depth": {
+          "type": "integer",
+          "const": 4
+        },
+        "levels": {
+          "type": "array",
+          "const": [
+            "mahadasha",
+            "antardasha",
+            "pratyantardasha",
+            "sookshma_dasha"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "period_counts": {
+          "type": "object",
+          "properties": {
+            "mahadasha": {
+              "type": "integer",
+              "const": 9
+            },
+            "antardasha": {
+              "type": "integer",
+              "const": 81
+            },
+            "pratyantardasha": {
+              "type": "integer",
+              "const": 729
+            },
+            "sookshma_dasha": {
+              "type": "integer",
+              "const": 6561
+            }
+          },
+          "required": [
+            "mahadasha",
+            "antardasha",
+            "pratyantardasha",
+            "sookshma_dasha"
+          ],
+          "additionalProperties": false
+        },
+        "duration_arithmetic": {
+          "type": "string",
+          "const": "exact_integer_microseconds_proportional_parent_duration"
+        }
+      },
+      "required": [
+        "calculation_status",
+        "practitioner_review",
+        "frame",
+        "node_model",
+        "classification_precision",
+        "interpretations",
+        "year_length",
+        "interval",
+        "timestamp_resolution",
+        "birth_balance_rounding",
+        "cycle_anchor",
+        "period_timestamps",
+        "depth",
+        "levels",
+        "period_counts",
+        "duration_arithmetic"
+      ],
+      "additionalProperties": false
+    },
+    "VimshottariResponseDepth2": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "current"
+        },
+        "type": {
+          "type": "string",
+          "const": "vimshottari"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "birth": {
+              "$ref": "#/$defs/NormalizedBirth"
+            },
+            "ayanamsa": {
+              "$ref": "#/$defs/Ayanamsa"
+            }
+          },
+          "required": [
+            "birth",
+            "ayanamsa"
+          ],
+          "additionalProperties": false
+        },
+        "birth_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "zodiac": {
+          "type": "string",
+          "const": "sidereal"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/Ayanamsa"
+        },
+        "moon": {
+          "type": "object",
+          "properties": {
+            "sidereal_longitude": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMaximum": 360
+            },
+            "nakshatra": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 27
+                },
+                "name": {
+                  "type": "string"
+                },
+                "lord": {
+                  "$ref": "#/$defs/DashaLord"
+                },
+                "pada": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4
+                },
+                "fraction_elapsed": {
+                  "type": "number",
+                  "minimum": 0,
+                  "exclusiveMaximum": 1
+                }
+              },
+              "required": [
+                "index",
+                "name",
+                "lord",
+                "pada",
+                "fraction_elapsed"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "sidereal_longitude",
+            "nakshatra"
+          ],
+          "additionalProperties": false
+        },
+        "birth_balance": {
+          "type": "object",
+          "properties": {
+            "lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "subperiod_lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "elapsed_years": {
+              "type": "number",
+              "minimum": 0
+            },
+            "remaining_years": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "remaining_days": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "start_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "end_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            }
+          },
+          "required": [
+            "lord",
+            "subperiod_lord",
+            "elapsed_years",
+            "remaining_years",
+            "remaining_days",
+            "start_utc",
+            "end_utc"
+          ],
+          "additionalProperties": false
+        },
+        "cycle": {
+          "type": "object",
+          "properties": {
+            "years": {
+              "type": "number",
+              "const": 120
+            },
+            "start_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "end_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            }
+          },
+          "required": [
+            "years",
+            "start_utc",
+            "end_utc"
+          ],
+          "additionalProperties": false
+        },
+        "periods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaPeriod"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        },
+        "metadata": {
+          "$ref": "#/$defs/VimshottariMetadata"
+        }
+      },
+      "required": [
+        "status",
+        "type",
+        "input",
+        "birth_utc",
+        "zodiac",
+        "ayanamsa",
+        "moon",
+        "birth_balance",
+        "cycle",
+        "periods",
+        "metadata"
+      ],
+      "additionalProperties": false,
+      "description": "All period timestamps are UTC with microsecond resolution and half-open intervals. Derived period offsets may extend beyond the birth ephemeris window; this does not extrapolate ephemeris positions. Unrounded Moon determines nakshatra and birth balance; elapsed duration is floored to microseconds. Current without practitioner sign-off."
+    },
+    "VimshottariResponseDepth3": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "current"
+        },
+        "type": {
+          "type": "string",
+          "const": "vimshottari"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "birth": {
+              "$ref": "#/$defs/NormalizedBirth"
+            },
+            "ayanamsa": {
+              "$ref": "#/$defs/Ayanamsa"
+            },
+            "depth": {
+              "type": "integer",
+              "const": 3
+            }
+          },
+          "required": [
+            "birth",
+            "ayanamsa",
+            "depth"
+          ],
+          "additionalProperties": false
+        },
+        "birth_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "zodiac": {
+          "type": "string",
+          "const": "sidereal"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/Ayanamsa"
+        },
+        "moon": {
+          "type": "object",
+          "properties": {
+            "sidereal_longitude": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMaximum": 360
+            },
+            "nakshatra": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 27
+                },
+                "name": {
+                  "type": "string"
+                },
+                "lord": {
+                  "$ref": "#/$defs/DashaLord"
+                },
+                "pada": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4
+                },
+                "fraction_elapsed": {
+                  "type": "number",
+                  "minimum": 0,
+                  "exclusiveMaximum": 1
+                }
+              },
+              "required": [
+                "index",
+                "name",
+                "lord",
+                "pada",
+                "fraction_elapsed"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "sidereal_longitude",
+            "nakshatra"
+          ],
+          "additionalProperties": false
+        },
+        "birth_balance": {
+          "type": "object",
+          "properties": {
+            "lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "subperiod_lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "elapsed_years": {
+              "type": "number",
+              "minimum": 0
+            },
+            "remaining_years": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "remaining_days": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "start_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "end_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "pratyantardasha_lord": {
+              "$ref": "#/$defs/DashaLord"
+            }
+          },
+          "required": [
+            "lord",
+            "subperiod_lord",
+            "elapsed_years",
+            "remaining_years",
+            "remaining_days",
+            "start_utc",
+            "end_utc",
+            "pratyantardasha_lord"
+          ],
+          "additionalProperties": false
+        },
+        "cycle": {
+          "type": "object",
+          "properties": {
+            "years": {
+              "type": "number",
+              "const": 120
+            },
+            "start_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "end_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            }
+          },
+          "required": [
+            "years",
+            "start_utc",
+            "end_utc"
+          ],
+          "additionalProperties": false
+        },
+        "periods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaPeriodDepth3"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        },
+        "metadata": {
+          "$ref": "#/$defs/VimshottariMetadataDepth3"
+        }
+      },
+      "required": [
+        "status",
+        "type",
+        "input",
+        "birth_utc",
+        "zodiac",
+        "ayanamsa",
+        "moon",
+        "birth_balance",
+        "cycle",
+        "periods",
+        "metadata"
+      ],
+      "additionalProperties": false,
+      "description": "All period timestamps are UTC with microsecond resolution and half-open intervals. Derived period offsets may extend beyond the birth ephemeris window; this does not extrapolate ephemeris positions. Unrounded Moon determines nakshatra and birth balance; elapsed duration is floored to microseconds. Current without practitioner sign-off."
+    },
+    "VimshottariResponseDepth4": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "current"
+        },
+        "type": {
+          "type": "string",
+          "const": "vimshottari"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "birth": {
+              "$ref": "#/$defs/NormalizedBirth"
+            },
+            "ayanamsa": {
+              "$ref": "#/$defs/Ayanamsa"
+            },
+            "depth": {
+              "type": "integer",
+              "const": 4
+            }
+          },
+          "required": [
+            "birth",
+            "ayanamsa",
+            "depth"
+          ],
+          "additionalProperties": false
+        },
+        "birth_utc": {
+          "$ref": "#/$defs/UtcTimestamp"
+        },
+        "zodiac": {
+          "type": "string",
+          "const": "sidereal"
+        },
+        "ayanamsa": {
+          "$ref": "#/$defs/Ayanamsa"
+        },
+        "moon": {
+          "$ref": "#/$defs/moon"
+        },
+        "birth_balance": {
+          "type": "object",
+          "properties": {
+            "lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "subperiod_lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "elapsed_years": {
+              "type": "number",
+              "minimum": 0
+            },
+            "remaining_years": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "remaining_days": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "start_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "end_utc": {
+              "$ref": "#/$defs/UtcTimestamp"
+            },
+            "pratyantardasha_lord": {
+              "$ref": "#/$defs/DashaLord"
+            },
+            "sookshma_dasha_lord": {
+              "$ref": "#/$defs/DashaLord"
+            }
+          },
+          "required": [
+            "lord",
+            "subperiod_lord",
+            "elapsed_years",
+            "remaining_years",
+            "remaining_days",
+            "start_utc",
+            "end_utc",
+            "pratyantardasha_lord",
+            "sookshma_dasha_lord"
+          ],
+          "additionalProperties": false
+        },
+        "cycle": {
+          "$ref": "#/$defs/cycle"
+        },
+        "periods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DashaPeriodDepth4"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        },
+        "metadata": {
+          "$ref": "#/$defs/VimshottariMetadataDepth4"
+        }
+      },
+      "required": [
+        "status",
+        "type",
+        "input",
+        "birth_utc",
+        "zodiac",
+        "ayanamsa",
+        "moon",
+        "birth_balance",
+        "cycle",
+        "periods",
+        "metadata"
+      ],
+      "additionalProperties": false,
+      "description": "Bounded depth-four Vimshottari supported with exactly 6,561 sookshma-dasha leaves and no arbitrary recursion."
+    },
+    "Zodiac": {
+      "type": "string",
+      "enum": [
+        "tropical",
+        "sidereal"
+      ]
+    }
+  }
+}

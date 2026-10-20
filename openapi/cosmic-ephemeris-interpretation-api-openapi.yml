@@ -1,0 +1,1237 @@
+openapi: 3.2.0
+info:
+  title: Cosmic Ephemeris calculation Interpretation API
+  version: 2026-10-12.current-contract-promotion
+  description: Machine-readable description of the seventy-eight live R231 calculation contracts. This DOCUMENT REVISION identifies the contract set; runtime availability is independently verified at the public gateway. Call the public Node gateway, not the internal Python service. API keys are server-side credentials. Bearer and x-api-key are alternatives, and dashboard cookies are not calculation credentials. Named keys can be restricted to one calculation scope or astro:*, can expire, and are shown only once at creation. Charts require a known civil time, valid IANA timezone, dates from 1800-01-01 through 2200-12-31, and valid coordinates. Tropical remains the default; supported sidereal ayanamsas are Lahiri, Raman, Krishnamurti, Fagan–Bradley, Yukteshwar, Sassanian, True Chitra, True Revati, True Pushya, Galactic Center at 0 Sagittarius, and Galactic Alignment/Mardyks. The birth-time-sensitivity workflow may instead receive an explicitly unknown or approximate time; it returns sampled stability only and never invents an exact chart. Vargas supports D1/D2/D3/D4/D5/D6/D7/D8/D9/D10/D11/D12/D16/D20/D24/D27/D30/D40/D45/D60/D81/D108/D144/D150. Vimshottari retains its two-level default and supports optional depth 3 and 4. The Ashtakavarga contract returns unreduced seven-planet Bhinnashtakavarga, contributor Prastara, and their 337-point Sarvashtakavarga sum, with explicit opt-in reductions and pindas and no interpretation or prediction. These are bounded calculation conventions, not a complete Jyotish system or practitioner validation.
+  termsOfService: https://cosmicephemeris.com/terms.html
+  contact:
+    name: Cosmic Ephemeris support
+    email: support@cosmicephemeris.com
+servers:
+- url: https://api.cosmicephemeris.com
+  description: Public gateway; no runtime version prefix
+security:
+- BearerApiKey: []
+- HeaderApiKey: []
+tags:
+- name: Interpretation
+  description: Deterministic rule-based output, distinct from raw calculation data.
+paths:
+  /api/astro/horoscope:
+    post:
+      operationId: calculateHoroscope
+      summary: Calculate supported structured horoscope signals
+      tags:
+      - Interpretation
+      description: 'Deterministic structured major-aspect signals. No language model, prose, compatibility score, medical/financial prediction, or house topics. The input echo currently omits transitTime/timezone; retain your request for reproducibility.
+
+
+        Each admitted request reserves one monthly usage unit before route validation or engine work; failed or timed-out admitted attempts are not refunded. Do not automatically retry.
+
+
+        This is a current, versioned contract; additive evolution follows the published API versioning policy.
+
+        Historical mode uses an explicit BCE/CE date object and UT1 conventions. Its response is the versioned historical envelope, not the modern UTC envelope. Read result for calculation fields and metadata for limits and uncertainty.'
+      x-contract-status: current
+      x-engine-timeout-ms: 15000
+      x-quota-group: api
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectedHoroscopeRequest'
+            examples:
+              canonical:
+                summary: Synthetic example; send with your server-side API key
+                value:
+                  birth:
+                    date: '1990-01-01'
+                    time: '12:00'
+                    timezone: America/New_York
+                    lat: 40.7128
+                    lon: -74.006
+                  transitDate: '2026-01-01'
+                  transitTime: '12:00'
+                  timezone: UTC
+              sidereal:
+                summary: Same calculation in Lahiri sidereal coordinates
+                value:
+                  birth:
+                    date: '1990-01-01'
+                    time: '12:00'
+                    timezone: America/New_York
+                    lat: 40.7128
+                    lon: -74.006
+                  transitDate: '2026-01-01'
+                  transitTime: '12:00'
+                  timezone: UTC
+                  zodiac: sidereal
+                  ayanamsa: lahiri
+              historical:
+                summary: Explicit historical input; bounded tool-specific work
+                value:
+                  birth:
+                    date:
+                      year: 1000
+                      era: BCE
+                      month: 1
+                      day: 1
+                      calendar: proleptic_gregorian
+                    time: '12:00'
+                    timezone: UT1
+                    lat: 40.7128
+                    lon: -74.006
+                  at:
+                    date:
+                      year: 1000
+                      era: BCE
+                      month: 1
+                      day: 1
+                      calendar: proleptic_gregorian
+                    time: '12:00'
+                    timezone: UT1
+      responses:
+        '200':
+          description: Successful calculation. Field nesting is specific to this route.
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                const: no-store
+            Pragma:
+              schema:
+                type: string
+                const: no-cache
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedHoroscopeHoroscopeResponse'
+              examples:
+                canonical:
+                  summary: Successful response for the canonical synthetic request
+                  value:
+                    type: horoscope
+                    input:
+                      birth:
+                        date: '1990-01-01'
+                        time: '12:00'
+                        timezone: America/New_York
+                        lat: 40.7128
+                        lon: -74.006
+                      transitDate: '2026-01-01'
+                      zodiac: tropical
+                      ayanamsa: lahiri
+                    interpretation:
+                      summary:
+                        overall_tone: challenging
+                        intensity: 0.9
+                      transits:
+                      - planet: Sun
+                        planet_nature: luminary
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Sun
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: sun_conjunction_sun
+                      - planet: Sun
+                        planet_nature: luminary
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Sextile
+                        natal_point: Moon
+                        house: null
+                        house_topics: []
+                        tone: opportunity
+                        intensity: 0.55
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: sun_sextile_moon
+                      - planet: Sun
+                        planet_nature: luminary
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Jupiter
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: sun_opposition_jupiter
+                      - planet: Sun
+                        planet_nature: luminary
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Saturn
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: sun_conjunction_saturn
+                      - planet: Sun
+                        planet_nature: luminary
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Uranus
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: sun_conjunction_uranus
+                      - planet: Sun
+                        planet_nature: luminary
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Neptune
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: sun_conjunction_neptune
+                      - planet: Moon
+                        planet_nature: luminary
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Mars
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: moon_opposition_mars
+                      - planet: Mercury
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Jupiter
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mercury_opposition_jupiter
+                      - planet: Mercury
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Uranus
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mercury_conjunction_uranus
+                      - planet: Venus
+                        planet_nature: benefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Sun
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 0.93
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: venus_conjunction_sun
+                      - planet: Venus
+                        planet_nature: benefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Sextile
+                        natal_point: Moon
+                        house: null
+                        house_topics: []
+                        tone: opportunity
+                        intensity: 0.43
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: venus_sextile_moon
+                      - planet: Venus
+                        planet_nature: benefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Jupiter
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 0.93
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: venus_opposition_jupiter
+                      - planet: Venus
+                        planet_nature: benefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Saturn
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 0.93
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: venus_conjunction_saturn
+                      - planet: Venus
+                        planet_nature: benefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Uranus
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 0.93
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: venus_conjunction_uranus
+                      - planet: Venus
+                        planet_nature: benefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Neptune
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 0.93
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: venus_conjunction_neptune
+                      - planet: Mars
+                        planet_nature: malefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Sun
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mars_conjunction_sun
+                      - planet: Mars
+                        planet_nature: malefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Jupiter
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mars_opposition_jupiter
+                      - planet: Mars
+                        planet_nature: malefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Saturn
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mars_conjunction_saturn
+                      - planet: Mars
+                        planet_nature: malefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Uranus
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mars_conjunction_uranus
+                      - planet: Mars
+                        planet_nature: malefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Neptune
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mars_conjunction_neptune
+                      - planet: Mars
+                        planet_nature: malefic
+                        planet_sect: night
+                        chart_sect: day
+                        aspect: Sextile
+                        natal_point: Pluto
+                        house: null
+                        house_topics: []
+                        tone: opportunity
+                        intensity: 0.87
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: mars_sextile_pluto
+                      - planet: Jupiter
+                        planet_nature: benefic
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Mercury
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 0.98
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: jupiter_opposition_mercury
+                      - planet: Jupiter
+                        planet_nature: benefic
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Opposition
+                        natal_point: Saturn
+                        house: null
+                        house_topics: []
+                        tone: polarizing
+                        intensity: 0.98
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: jupiter_opposition_saturn
+                      - planet: Jupiter
+                        planet_nature: benefic
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Trine
+                        natal_point: Pluto
+                        house: null
+                        house_topics: []
+                        tone: supportive
+                        intensity: 0.68
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: jupiter_trine_pluto
+                      - planet: Saturn
+                        planet_nature: malefic
+                        planet_sect: day
+                        chart_sect: day
+                        aspect: Sextile
+                        natal_point: Mercury
+                        house: null
+                        house_topics: []
+                        tone: opportunity
+                        intensity: 0.63
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: saturn_sextile_mercury
+                      - planet: Uranus
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Trine
+                        natal_point: Mercury
+                        house: null
+                        house_topics: []
+                        tone: supportive
+                        intensity: 0.7
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: uranus_trine_mercury
+                      - planet: Neptune
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Sextile
+                        natal_point: Mercury
+                        house: null
+                        house_topics: []
+                        tone: opportunity
+                        intensity: 0.5
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: neptune_sextile_mercury
+                      - planet: Neptune
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Square
+                        natal_point: Jupiter
+                        house: null
+                        house_topics: []
+                        tone: challenging
+                        intensity: 0.9
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: neptune_square_jupiter
+                      - planet: Pluto
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Mercury
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: pluto_conjunction_mercury
+                      - planet: Pluto
+                        planet_nature: neutral
+                        planet_sect: neutral
+                        chart_sect: day
+                        aspect: Conjunction
+                        natal_point: Venus
+                        house: null
+                        house_topics: []
+                        tone: intensifying
+                        intensity: 1
+                        tradition:
+                        - hellenistic
+                        - western
+                        summary_key: pluto_conjunction_venus
+        '400':
+          $ref: '#/components/responses/InvalidInput'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '413':
+          $ref: '#/components/responses/TooLarge'
+        '429':
+          $ref: '#/components/responses/Limited'
+        '500':
+          $ref: '#/components/responses/InternalFailure'
+        '502':
+          $ref: '#/components/responses/EngineUnavailable'
+        '503':
+          $ref: '#/components/responses/Busy'
+        '504':
+          $ref: '#/components/responses/EngineTimeout'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        required:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              anyOf:
+              - type: string
+              - type: array
+                items:
+                  type: string
+        example:
+          type: object
+          additionalProperties: true
+      required:
+      - error
+      additionalProperties: true
+      description: Current gateway errors guarantee an error string, not a universal code/details envelope. Some validation errors add required/example. Reverse-proxy failures can be HTML, so clients must not assume JSON for every non-2xx.
+    HistoricalTimezone:
+      type: string
+      pattern: ^UT1(?:[+-](?:0[0-9]|1[0-3]):[0-5][0-9](?::[0-5][0-9])?|[+-]14:00(?::00)?)?(?![\s\S])
+      description: Explicit UT1 or fixed offset UT1+/-HH:MM[:SS], within 14 hours. Local clock minus offset yields UT1, not UTC. No IANA timezone inference. Original offset spelling is preserved.
+    PlanetName:
+      type: string
+      enum:
+      - Sun
+      - Moon
+      - Mercury
+      - Venus
+      - Mars
+      - Jupiter
+      - Saturn
+      - Uranus
+      - Neptune
+      - Pluto
+    ConnectedHoroscopeHoroscopeResponse:
+      oneOf:
+      - $ref: '#/components/schemas/HoroscopeResponse'
+      - $ref: '#/components/schemas/HistoricalHoroscopeHoroscopeResponse'
+    HistoricalBirthInput:
+      type: object
+      additionalProperties: false
+      required:
+      - date
+      - time
+      - timezone
+      - lat
+      - lon
+      properties:
+        date:
+          $ref: '#/components/schemas/HistoricalDate'
+        time:
+          $ref: '#/components/schemas/HistoricalClock'
+        timezone:
+          $ref: '#/components/schemas/HistoricalTimezone'
+        lat:
+          type: number
+          exclusiveMinimum: -90
+          exclusiveMaximum: 90
+        lon:
+          type: number
+          minimum: -180
+          exclusiveMaximum: 180
+    OptionalTransitTime:
+      anyOf:
+      - $ref: '#/components/schemas/Time'
+      - type: 'null'
+      default: '12:00'
+      description: Omitted/null means 12:00; false/empty string and malformed values are rejected.
+    InterpretationAtom:
+      type: object
+      properties:
+        planet:
+          $ref: '#/components/schemas/PlanetName'
+        planet_nature:
+          type: string
+          enum:
+          - luminary
+          - neutral
+          - benefic
+          - malefic
+        planet_sect:
+          type: string
+          enum:
+          - day
+          - night
+          - neutral
+        chart_sect:
+          type: string
+          enum:
+          - day
+          - night
+          description: Natal apparent topocentric Sun center geometric altitude >0 degrees means day; WGS84 elevation zero, no atmospheric refraction.
+        aspect:
+          type: string
+          enum:
+          - Conjunction
+          - Opposition
+          - Square
+          - Trine
+          - Sextile
+        natal_point:
+          $ref: '#/components/schemas/PlanetName'
+        house:
+          type: 'null'
+          description: No house assignment is implemented for this endpoint.
+        house_topics:
+          type: array
+          items:
+            type: string
+          maxItems: 0
+        tone:
+          type: string
+          enum:
+          - intensifying
+          - polarizing
+          - challenging
+          - supportive
+          - opportunity
+        intensity:
+          type: number
+          minimum: 0.1
+          maximum: 1
+          description: Deterministic traditional-rule heuristic, not a probability or scientifically validated prediction.
+        tradition:
+          type: array
+          items:
+            type: string
+            enum:
+            - hellenistic
+            - western
+          minItems: 2
+          maxItems: 2
+        summary_key:
+          type: string
+          description: Machine key such as saturn_square_sun, not authored/generated prose.
+      required:
+      - planet
+      - planet_nature
+      - planet_sect
+      - chart_sect
+      - aspect
+      - natal_point
+      - house
+      - house_topics
+      - tone
+      - intensity
+      - tradition
+      - summary_key
+      additionalProperties: true
+    ZodiacInput:
+      type:
+      - string
+      - 'null'
+      pattern: ^\s*(?:[Tt][Rr][Oo][Pp][Ii][Cc][Aa][Ll]|[Ss][Ii][Dd][Ee][Rr][Ee][Aa][Ll])\s*$
+      default: tropical
+      description: tropical or sidereal; server trims whitespace and ignores case. Omitted/null selects tropical.
+      x-canonical-values:
+      - tropical
+      - sidereal
+    HistoricalDate:
+      type: object
+      additionalProperties: false
+      required:
+      - year
+      - era
+      - month
+      - day
+      - calendar
+      properties:
+        year:
+          type: integer
+          minimum: 1
+          maximum: 2500
+        era:
+          enum:
+          - BCE
+          - CE
+          description: Display BCE (BC) / CE (AD); API values remain BCE / CE. No year zero.
+        month:
+          type: integer
+          minimum: 1
+          maximum: 12
+        day:
+          type: integer
+          minimum: 1
+          maximum: 31
+        calendar:
+          enum:
+          - proleptic_gregorian
+          - proleptic_julian
+          description: Explicit choice; applies the selected calendar rules throughout history without a regional adoption switch.
+      allOf:
+      - if:
+          type: object
+          properties:
+            era:
+              const: BCE
+        then:
+          type: object
+          properties:
+            year:
+              maximum: 1000
+      description: Explicit civil date, 1000 BCE (BC)–2500 CE (AD); no year zero. Calendar validity is checked by the server. Available only on documented connected historical operations, with explicit UT1/fixed-offset conventions.
+    HistoricalDateTime:
+      type: object
+      additionalProperties: false
+      required:
+      - date
+      - time
+      - timezone
+      properties:
+        date:
+          $ref: '#/components/schemas/HistoricalDate'
+        time:
+          $ref: '#/components/schemas/HistoricalClock'
+        timezone:
+          $ref: '#/components/schemas/HistoricalTimezone'
+      description: Shared historical input contract; parsing alone does not enable a calculation route. Derived calculation records can include fractional seconds and are not this input type.
+    Date:
+      type: string
+      format: date
+      pattern: ^(?:18[0-9]{2}|19[0-9]{2}|2[01][0-9]{2}|2200)-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
+      description: Valid Gregorian YYYY-MM-DD local civil date, inclusive 1800-01-01 through 2200-12-31. Calendar validity and timezone conversion are checked by the server.
+    HoroscopeRequest:
+      type: object
+      properties:
+        birth:
+          $ref: '#/components/schemas/BirthInput'
+        transitDate:
+          anyOf:
+          - $ref: '#/components/schemas/Date'
+          - type: 'null'
+          description: Omitted/null selects the engine host current UTC date. Supply an explicit date for reproducible results.
+        transitTime:
+          $ref: '#/components/schemas/OptionalTransitTime'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+          description: Transit timezone only. Omitted/null/empty string means UTC, NOT the birth timezone. Birth timezone is not overridden.
+        zodiac:
+          $ref: '#/components/schemas/ZodiacInput'
+        ayanamsa:
+          $ref: '#/components/schemas/AyanamsaInput'
+      required:
+      - birth
+      additionalProperties: true
+      allOf:
+      - $ref: '#/components/schemas/SiderealFlagsConstraint'
+    AyanamsaInput:
+      type:
+      - string
+      - 'null'
+      pattern: \S
+      default: lahiri
+      description: Sidereal supports lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra, true_revati, true_pushya, galactic_center_0_sagittarius, galactic_alignment_mardyks, with case/whitespace normalization; other names return 400 in sidereal mode. Omitted/null selects lahiri. Tropical mode ignores a nonempty string and outputs null. This schema describes that compatibility behavior rather than claiming every string is a supported sidereal model.
+      x-canonical-values:
+      - lahiri
+      - raman
+      - krishnamurti
+      - fagan_bradley
+      - yukteshwar
+      - sassanian
+      - true_chitra
+      - true_revati
+      - true_pushya
+      - galactic_center_0_sagittarius
+      - galactic_alignment_mardyks
+    Latitude:
+      anyOf:
+      - type: number
+        exclusiveMinimum: -90
+        exclusiveMaximum: 90
+      - type: string
+        pattern: ^\s*[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?\s*$
+      description: WGS84 decimal latitude. JSON numbers are recommended; numeric strings are accepted by the current engine, then checked for finiteness/range. Exact poles and undefined Ascendant geometry return 400; supported successful latitude is strictly between -90 and 90. Boolean/null/object/array coordinates are invalid.
+    Time:
+      type: string
+      pattern: ^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$
+      description: HH:MM or HH:MM:SS; no offset in this field. Use timezone to select the civil-time zone.
+    Interpretation:
+      type: object
+      properties:
+        summary:
+          type: object
+          properties:
+            overall_tone:
+              type: string
+              enum:
+              - supportive
+              - challenging
+              - mixed
+            intensity:
+              type: number
+              minimum: 0
+              maximum: 1
+          required:
+          - overall_tone
+          - intensity
+          additionalProperties: true
+        transits:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterpretationAtom'
+      required:
+      - summary
+      - transits
+      additionalProperties: true
+    HistoricalClock:
+      type: string
+      pattern: ^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?(?![\s\S])
+      description: Explicit HH:MM[:SS]; whole seconds only, no leap seconds. Normalized helper output includes seconds.
+    HoroscopeResponse:
+      type: object
+      properties:
+        type:
+          const: horoscope
+        input:
+          type: object
+          properties:
+            birth:
+              $ref: '#/components/schemas/BirthInput'
+            transitDate:
+              $ref: '#/components/schemas/Date'
+            zodiac:
+              $ref: '#/components/schemas/ZodiacInput'
+            ayanamsa:
+              $ref: '#/components/schemas/AyanamsaInput'
+          required:
+          - birth
+          - transitDate
+          - zodiac
+          - ayanamsa
+          additionalProperties: true
+        interpretation:
+          $ref: '#/components/schemas/Interpretation'
+      required:
+      - type
+      - input
+      - interpretation
+      additionalProperties: true
+      description: Supported deterministic structured major-aspect signals. No language model, prose, compatibility score, medical/financial prediction, or house topics. The input echo currently omits transitTime/timezone; retain your request for reproducibility.
+    HistoricalHoroscopeRequest:
+      type: object
+      properties:
+        birth:
+          $ref: '#/components/schemas/HistoricalBirthInput'
+        zodiac:
+          type:
+          - string
+          - 'null'
+          pattern: ^\s*(?:[Tt][Rr][Oo][Pp][Ii][Cc][Aa][Ll]|[Ss][Ii][Dd][Ee][Rr][Ee][Aa][Ll])\s*$
+          default: tropical
+          description: tropical or sidereal; server trims whitespace and ignores case. Omitted/null selects tropical.
+          x-canonical-values:
+          - tropical
+          - sidereal
+        ayanamsa:
+          type:
+          - string
+          - 'null'
+          pattern: \S
+          default: lahiri
+          description: Sidereal supports lahiri, raman, krishnamurti, fagan_bradley, yukteshwar, sassanian, true_chitra, true_revati, true_pushya, galactic_center_0_sagittarius, galactic_alignment_mardyks, with case/whitespace normalization; other names return 400 in sidereal mode. Omitted/null selects lahiri. Tropical mode ignores a nonempty string and outputs null. This schema describes that compatibility behavior rather than claiming every string is a supported sidereal model.
+          x-canonical-values:
+          - lahiri
+          - raman
+          - krishnamurti
+          - fagan_bradley
+          - yukteshwar
+          - sassanian
+          - true_chitra
+          - true_revati
+          - true_pushya
+          - galactic_center_0_sagittarius
+          - galactic_alignment_mardyks
+        at:
+          $ref: '#/components/schemas/HistoricalDateTime'
+      required:
+      - birth
+      - at
+      additionalProperties: false
+      allOf:
+      - description: Only supported ayanamsa names are valid when zodiac is sidereal; tropical retains its legacy ignore behavior.
+        if:
+          type: object
+          properties:
+            zodiac:
+              type: string
+              pattern: ^\s*(?:[Ss][Ii][Dd][Ee][Rr][Ee][Aa][Ll])\s*$
+          required:
+          - zodiac
+        then:
+          type: object
+          properties:
+            ayanamsa:
+              type:
+              - string
+              - 'null'
+              pattern: ^\s*(?:[Ll][Aa][Hh][Ii][Rr][Ii]|[Rr][Aa][Mm][Aa][Nn]|[Kk][Rr][Ii][Ss][Hh][Nn][Aa][Mm][Uu][Rr][Tt][Ii])\s*$
+      description: Explicit historical mode, 1000 BCE (BC)–2500 CE (AD). No year zero, implicit calendar, UTC or IANA zone. Preserve tool-specific mathematical, geographic and search limits; calendar/time conventions and estimated Delta-T are not certified historical accuracy.
+    SiderealFlagsConstraint:
+      description: Only supported ayanamsa names are valid when zodiac is sidereal; tropical retains its legacy ignore behavior.
+      if:
+        type: object
+        properties:
+          zodiac:
+            type: string
+            pattern: ^\s*(?:[Ss][Ii][Dd][Ee][Rr][Ee][Aa][Ll])\s*$
+        required:
+        - zodiac
+      then:
+        type: object
+        properties:
+          ayanamsa:
+            type:
+            - string
+            - 'null'
+            pattern: ^\s*(?:[Ll][Aa][Hh][Ii][Rr][Ii]|[Rr][Aa][Mm][Aa][Nn]|[Kk][Rr][Ii][Ss][Hh][Nn][Aa][Mm][Uu][Rr][Tt][Ii])\s*$
+    HistoricalHoroscopeHoroscopeResponse:
+      type: object
+      additionalProperties: true
+      required:
+      - schema
+      - status
+      - type
+      - input
+      - result
+      - metadata
+      properties:
+        schema:
+          const: cosmicephemeris-historical-calculation-v1
+        status:
+          const: historical
+        type:
+          const: horoscope
+        input:
+          $ref: '#/components/schemas/HistoricalHoroscopeRequest'
+        result:
+          type: object
+          additionalProperties: true
+          description: Complete historical calculation adapter result. Times are explicit UT1 date records, never UTC strings; derived times may include fractional seconds and years outside the input range.
+        metadata:
+          type: object
+          additionalProperties: true
+          required:
+          - time_standard
+          - historical_accuracy_certified
+          - warnings
+          properties:
+            time_standard:
+              const: UT1
+            historical_accuracy_certified:
+              const: false
+            warnings:
+              type: array
+              items:
+                type: string
+    ConnectedHoroscopeRequest:
+      oneOf:
+      - $ref: '#/components/schemas/HoroscopeRequest'
+      - $ref: '#/components/schemas/HistoricalHoroscopeRequest'
+    Longitude:
+      anyOf:
+      - type: number
+        minimum: -180
+        maximum: 180
+      - type: string
+        pattern: ^\s*[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?\s*$
+      description: WGS84 decimal longitude, east positive, within [-180,180]. JSON numbers are recommended; numeric strings are accepted then checked for finiteness/range.
+    Timezone:
+      type:
+      - string
+      - 'null'
+      description: IANA timezone name (for example America/New_York). Omission, null, or empty string means UTC for a birth input. Nonexistent or ambiguous local clock-change times return 400; provide the known UTC date/time with timezone UTC instead.
+      examples:
+      - UTC
+      - America/New_York
+      - Asia/Kolkata
+    BirthInput:
+      type: object
+      properties:
+        date:
+          $ref: '#/components/schemas/Date'
+        time:
+          $ref: '#/components/schemas/Time'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        lat:
+          $ref: '#/components/schemas/Latitude'
+        lon:
+          $ref: '#/components/schemas/Longitude'
+      required:
+      - date
+      - time
+      - lat
+      - lon
+      additionalProperties: true
+  responses:
+    NotFound:
+      description: Wrong/case-variant/noncanonical or trailing-slash route; public paths have no version prefix.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Not found
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    Busy:
+      description: 'Four-request global calculation pool full (Retry-After: 2), maintenance or upstream service unavailable.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Astrology service is busy; retry shortly
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+      headers:
+        Retry-After:
+          description: Present for application concurrency rejection as 2 seconds. Other rejection sources may omit it or use a different delay. Do not automatically retry charged calculation attempts.
+          schema:
+            type: string
+    Unauthorized:
+      description: Missing, invalid, revoked API key or unavailable activated key owner. Dashboard cookies do not authenticate calculation routes.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Missing API key
+    TooLarge:
+      description: Request exceeds the body limit; gateway JSON is capped at 128 KiB. Edge failures may be HTML.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Request body too large
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    InvalidInput:
+      description: Invalid request, malformed JSON, out-of-range date/location, unknown model, invalid timezone or ambiguous/nonexistent clock-change time. Invalid attempts reaching quota reservation consume one unit.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Invalid request
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    Forbidden:
+      description: Origin not allowed by production CORS policy. Server-to-server requests can omit Origin.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Origin not allowed
+    EngineUnavailable:
+      description: Engine unavailable, unsuccessful internal server response or invalid upstream JSON. No engine internals are exposed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Birth chart calculation failed
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    EngineTimeout:
+      description: 'Application engine timeout: 15 seconds normally; planetary events, house ingresses, aspect windows, event calendar, eclipse geometry, electional search, and event-rule search use 30 seconds; Nakshatra Timeline plus the explicitly enumerated readiness, robustness, location, uncertainty, and electional-audit family use 60 seconds. Timer includes response-body parsing; an admitted timeout consumes quota.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Birth chart calculation failed
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+    Limited:
+      description: 'Monthly quota exhausted, per-user two-request concurrency reached, or nginx rate/connection admission refused. Retry-After: 2 is sent for application per-user concurrency only, not a promise that monthly quota resets in two seconds.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: API quota exceeded
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+      headers:
+        Retry-After:
+          description: Present for application concurrency rejection as 2 seconds. Other rejection sources may omit it or use a different delay. Do not automatically retry charged calculation attempts.
+          schema:
+            type: string
+    InternalFailure:
+      description: Bounded gateway/database/internal failure. An admitted attempt can still consume quota.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            typical:
+              value:
+                error: Server error
+        text/html:
+          schema:
+            type: string
+            description: A reverse proxy may return an HTML error page.
+  securitySchemes:
+    BearerApiKey:
+      type: http
+      scheme: bearer
+      bearerFormat: 64 hexadecimal characters
+      description: Opaque 256-bit Cosmic Ephemeris key; not a Stripe key or dashboard JWT. Exact 'Bearer ' prefix.
+    HeaderApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Opaque 64-hex-character Cosmic Ephemeris key. Use instead of Authorization; a nonempty Bearer credential takes precedence if both are sent.
+x-plan-limits:
+  period: UTC calendar month
+  standard:
+    free: 500
+    basic: 10000
+    pro: 100000
+  nakshatra:
+    pro: 1000
+x-verification-boundary: Seventy-eight deployed calculation contracts are described. The twenty-six R206-R231 electional reliability audits are bounded sampled evidence without hidden weights, rankings, interpretation, prediction, or recommendation. Ashtakavarga is an unreduced calculation-only current contract; specialist review does not alter its technical support status. House ingresses use fixed Equal/Whole Sign reference cusps and exclude Placidus/Porphyry. Natal pattern and planetary-hour classifications are bounded calculation-only methods. Fixed-star activation requires the immutable admitted six-row CC0 catalog; no minor-body contract or runtime is included.

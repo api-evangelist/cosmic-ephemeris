@@ -1,0 +1,21 @@
+{
+  "provider": "cosmic-ephemeris",
+  "sources": [
+    "cosmic-ephemeris-openapi.json"
+  ],
+  "outputs": [
+    "cosmic-ephemeris-calculations-api-openapi.yml",
+    "cosmic-ephemeris-interpretation-api-openapi.yml",
+    "cosmic-ephemeris-pro-timeline-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/cosmic-ephemeris-openapi.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "cosmic-ephemeris-openapi.json: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+3 apis, 3 total)"
+  ],
+  "skipped": []
+}

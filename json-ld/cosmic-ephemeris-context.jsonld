@@ -1,0 +1,1414 @@
+{
+  "@context": {
+    "@vocab": "https://cosmicephemeris.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "cosmic": "https://cosmicephemeris.com/schema#",
+    "NumerologyRequest": "cosmic:NumerologyRequest",
+    "birth_date": {
+      "@id": "cosmic:birth_date",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "cosmic:name",
+      "@type": "xsd:string"
+    },
+    "master_numbers": {
+      "@id": "cosmic:master_numbers",
+      "@type": "xsd:boolean"
+    },
+    "y_vowel": {
+      "@id": "cosmic:y_vowel",
+      "@type": "xsd:boolean"
+    },
+    "year": {
+      "@id": "cosmic:year",
+      "@type": "xsd:integer"
+    },
+    "NumerologyReduction": "cosmic:NumerologyReduction",
+    "total": {
+      "@id": "cosmic:total",
+      "@type": "xsd:integer"
+    },
+    "steps": {
+      "@id": "cosmic:steps",
+      "@container": "@list"
+    },
+    "number": {
+      "@id": "cosmic:number",
+      "@type": "xsd:integer"
+    },
+    "master_number": {
+      "@id": "cosmic:master_number",
+      "@type": "xsd:boolean"
+    },
+    "NumerologyResponse": "cosmic:NumerologyResponse",
+    "type": {
+      "@id": "cosmic:type"
+    },
+    "status": {
+      "@id": "cosmic:status"
+    },
+    "method": {
+      "@id": "cosmic:method"
+    },
+    "input": {
+      "@id": "cosmic:input",
+      "@type": "@id"
+    },
+    "date_components": {
+      "@id": "cosmic:date_components"
+    },
+    "numbers": {
+      "@id": "cosmic:numbers"
+    },
+    "name_analysis": {
+      "@id": "cosmic:name_analysis"
+    },
+    "metadata": {
+      "@id": "cosmic:metadata"
+    },
+    "PlaceSearchRequest": "cosmic:PlaceSearchRequest",
+    "query": {
+      "@id": "cosmic:query",
+      "@type": "xsd:string"
+    },
+    "country_codes": {
+      "@id": "cosmic:country_codes",
+      "@container": "@list"
+    },
+    "limit": {
+      "@id": "cosmic:limit",
+      "@type": "xsd:integer"
+    },
+    "PlaceProvenance": "cosmic:PlaceProvenance",
+    "provider": {
+      "@id": "cosmic:provider"
+    },
+    "dataset_version": {
+      "@id": "cosmic:dataset_version"
+    },
+    "source_id": {
+      "@id": "cosmic:source_id",
+      "@type": "xsd:string"
+    },
+    "license_id": {
+      "@id": "cosmic:license_id"
+    },
+    "attribution": {
+      "@id": "cosmic:attribution",
+      "@type": "xsd:string"
+    },
+    "PlaceCandidate": "cosmic:PlaceCandidate",
+    "place_id": {
+      "@id": "cosmic:place_id",
+      "@type": "xsd:string"
+    },
+    "display_name": {
+      "@id": "cosmic:display_name",
+      "@type": "xsd:string"
+    },
+    "country_code": {
+      "@id": "cosmic:country_code",
+      "@type": "xsd:string"
+    },
+    "admin1": {
+      "@id": "cosmic:admin1",
+      "@type": "xsd:string"
+    },
+    "lat": {
+      "@id": "cosmic:lat",
+      "@type": "@id"
+    },
+    "lon": {
+      "@id": "cosmic:lon",
+      "@type": "@id"
+    },
+    "timezone": {
+      "@id": "cosmic:timezone",
+      "@type": "@id"
+    },
+    "provenance": {
+      "@id": "cosmic:provenance",
+      "@type": "@id"
+    },
+    "PlaceSearchResponse": "cosmic:PlaceSearchResponse",
+    "results": {
+      "@id": "cosmic:results",
+      "@container": "@list"
+    },
+    "result_count": {
+      "@id": "cosmic:result_count",
+      "@type": "xsd:integer"
+    },
+    "TimezoneResolveRequest": "cosmic:TimezoneResolveRequest",
+    "date": {
+      "@id": "cosmic:date",
+      "@type": "@id"
+    },
+    "time": {
+      "@id": "cosmic:time",
+      "@type": "@id"
+    },
+    "CivilTimeCandidate": "cosmic:CivilTimeCandidate",
+    "utc": {
+      "@id": "cosmic:utc",
+      "@type": "@id"
+    },
+    "utc_offset_seconds": {
+      "@id": "cosmic:utc_offset_seconds",
+      "@type": "xsd:integer"
+    },
+    "utc_offset": {
+      "@id": "cosmic:utc_offset",
+      "@type": "xsd:string"
+    },
+    "abbreviation": {
+      "@id": "cosmic:abbreviation",
+      "@type": "xsd:string"
+    },
+    "TimezoneResolveResponse": "cosmic:TimezoneResolveResponse",
+    "place": {
+      "@id": "cosmic:place"
+    },
+    "civil_time": {
+      "@id": "cosmic:civil_time"
+    },
+    "calculation_ready": {
+      "@id": "cosmic:calculation_ready",
+      "@type": "xsd:boolean"
+    },
+    "resolved_input": {
+      "@id": "cosmic:resolved_input"
+    },
+    "NatalContextFormat": "cosmic:NatalContextFormat",
+    "NatalContextRequest": "cosmic:NatalContextRequest",
+    "birth": {
+      "@id": "cosmic:birth",
+      "@type": "@id"
+    },
+    "zodiac": {
+      "@id": "cosmic:zodiac",
+      "@type": "@id"
+    },
+    "ayanamsa": {
+      "@id": "cosmic:ayanamsa",
+      "@type": "@id"
+    },
+    "house_system": {
+      "@id": "cosmic:house_system",
+      "@type": "xsd:string"
+    },
+    "formats": {
+      "@id": "cosmic:formats",
+      "@container": "@list"
+    },
+    "NatalContextFact": "cosmic:NatalContextFact",
+    "id": {
+      "@id": "cosmic:id",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "cosmic:label",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "cosmic:value",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "cosmic:source",
+      "@type": "xsd:string"
+    },
+    "NatalContextArtifact": "cosmic:NatalContextArtifact",
+    "format": {
+      "@id": "cosmic:format",
+      "@type": "@id"
+    },
+    "media_type": {
+      "@id": "cosmic:media_type",
+      "@type": "xsd:string"
+    },
+    "encoding": {
+      "@id": "cosmic:encoding"
+    },
+    "bytes": {
+      "@id": "cosmic:bytes",
+      "@type": "xsd:integer"
+    },
+    "sha256": {
+      "@id": "cosmic:sha256",
+      "@type": "xsd:string"
+    },
+    "text": {
+      "@id": "cosmic:text",
+      "@type": "xsd:string"
+    },
+    "NatalContextResponse": "cosmic:NatalContextResponse",
+    "calculation_profile": {
+      "@id": "cosmic:calculation_profile"
+    },
+    "facts": {
+      "@id": "cosmic:facts",
+      "@container": "@list"
+    },
+    "calculation_hash": {
+      "@id": "cosmic:calculation_hash",
+      "@type": "xsd:string"
+    },
+    "guardrails": {
+      "@id": "cosmic:guardrails"
+    },
+    "artifacts": {
+      "@id": "cosmic:artifacts",
+      "@container": "@list"
+    },
+    "Zodiac": "cosmic:Zodiac",
+    "Ayanamsa": "cosmic:Ayanamsa",
+    "BirthInput": "cosmic:BirthInput",
+    "HistoricalDate": "cosmic:HistoricalDate",
+    "era": {
+      "@id": "cosmic:era"
+    },
+    "month": {
+      "@id": "cosmic:month",
+      "@type": "xsd:integer"
+    },
+    "day": {
+      "@id": "cosmic:day",
+      "@type": "xsd:integer"
+    },
+    "calendar": {
+      "@id": "cosmic:calendar"
+    },
+    "HistoricalDateTime": "cosmic:HistoricalDateTime",
+    "BirthChartRequest": "cosmic:BirthChartRequest",
+    "AspectsRequest": "cosmic:AspectsRequest",
+    "HousesRequest": "cosmic:HousesRequest",
+    "system": {
+      "@id": "cosmic:system",
+      "@type": "@id"
+    },
+    "SynastryRequest": "cosmic:SynastryRequest",
+    "personA": {
+      "@id": "cosmic:personA",
+      "@type": "@id"
+    },
+    "personB": {
+      "@id": "cosmic:personB",
+      "@type": "@id"
+    },
+    "TransitsRequest": "cosmic:TransitsRequest",
+    "transitDate": {
+      "@id": "cosmic:transitDate",
+      "@type": "@id"
+    },
+    "transitTime": {
+      "@id": "cosmic:transitTime",
+      "@type": "@id"
+    },
+    "HoroscopeRequest": "cosmic:HoroscopeRequest",
+    "TimelinePlanet": "cosmic:TimelinePlanet",
+    "TimelineRequest": "cosmic:TimelineRequest",
+    "planet": {
+      "@id": "cosmic:planet",
+      "@type": "xsd:string"
+    },
+    "start_utc": {
+      "@id": "cosmic:start_utc",
+      "@type": "@id"
+    },
+    "end_utc": {
+      "@id": "cosmic:end_utc",
+      "@type": "@id"
+    },
+    "PlanetName": "cosmic:PlanetName",
+    "Sign": "cosmic:Sign",
+    "Nakshatra": "cosmic:Nakshatra",
+    "index": {
+      "@id": "cosmic:index",
+      "@type": "xsd:integer"
+    },
+    "ruler": {
+      "@id": "cosmic:ruler",
+      "@type": "xsd:string"
+    },
+    "pada": {
+      "@id": "cosmic:pada",
+      "@type": "xsd:integer"
+    },
+    "deg_into_nakshatra": {
+      "@id": "cosmic:deg_into_nakshatra",
+      "@type": "xsd:decimal"
+    },
+    "PlanetPosition": "cosmic:PlanetPosition",
+    "sign": {
+      "@id": "cosmic:sign",
+      "@type": "@id"
+    },
+    "deg_in_sign": {
+      "@id": "cosmic:deg_in_sign",
+      "@type": "@id"
+    },
+    "speed_deg_per_day": {
+      "@id": "cosmic:speed_deg_per_day",
+      "@type": "xsd:decimal"
+    },
+    "retrograde": {
+      "@id": "cosmic:retrograde",
+      "@type": "xsd:boolean"
+    },
+    "tropical_lon": {
+      "@id": "cosmic:tropical_lon",
+      "@type": "@id"
+    },
+    "sidereal_lon": {
+      "@id": "cosmic:sidereal_lon",
+      "@type": "@id"
+    },
+    "nakshatra": {
+      "@id": "cosmic:nakshatra",
+      "@type": "@id"
+    },
+    "Planets": "cosmic:Planets",
+    "Sun": {
+      "@id": "cosmic:Sun",
+      "@type": "@id"
+    },
+    "Moon": {
+      "@id": "cosmic:Moon",
+      "@type": "@id"
+    },
+    "Mercury": {
+      "@id": "cosmic:Mercury",
+      "@type": "@id"
+    },
+    "Venus": {
+      "@id": "cosmic:Venus",
+      "@type": "@id"
+    },
+    "Mars": {
+      "@id": "cosmic:Mars",
+      "@type": "@id"
+    },
+    "Jupiter": {
+      "@id": "cosmic:Jupiter",
+      "@type": "@id"
+    },
+    "Saturn": {
+      "@id": "cosmic:Saturn",
+      "@type": "@id"
+    },
+    "Uranus": {
+      "@id": "cosmic:Uranus",
+      "@type": "@id"
+    },
+    "Neptune": {
+      "@id": "cosmic:Neptune",
+      "@type": "@id"
+    },
+    "Pluto": {
+      "@id": "cosmic:Pluto",
+      "@type": "@id"
+    },
+    "AspectType": "cosmic:AspectType",
+    "NatalAspect": "cosmic:NatalAspect",
+    "p1": {
+      "@id": "cosmic:p1",
+      "@type": "@id"
+    },
+    "p2": {
+      "@id": "cosmic:p2",
+      "@type": "@id"
+    },
+    "exact_angle": {
+      "@id": "cosmic:exact_angle",
+      "@type": "xsd:decimal"
+    },
+    "distance": {
+      "@id": "cosmic:distance",
+      "@type": "xsd:decimal"
+    },
+    "orb": {
+      "@id": "cosmic:orb",
+      "@type": "xsd:decimal"
+    },
+    "CrossAspect": "cosmic:CrossAspect",
+    "transit": {
+      "@id": "cosmic:transit",
+      "@type": "@id"
+    },
+    "natal": {
+      "@id": "cosmic:natal",
+      "@type": "@id"
+    },
+    "Cusps": "cosmic:Cusps",
+    "HouseSystem": "cosmic:HouseSystem",
+    "houses": {
+      "@id": "cosmic:houses",
+      "@type": "@id"
+    },
+    "HouseSystems": "cosmic:HouseSystems",
+    "equal": {
+      "@id": "cosmic:equal",
+      "@type": "@id"
+    },
+    "whole_sign": {
+      "@id": "cosmic:whole_sign",
+      "@type": "@id"
+    },
+    "Houses": "cosmic:Houses",
+    "ascendant": {
+      "@id": "cosmic:ascendant",
+      "@type": "xsd:decimal"
+    },
+    "mc": {
+      "@id": "cosmic:mc",
+      "@type": "xsd:decimal"
+    },
+    "systems": {
+      "@id": "cosmic:systems",
+      "@type": "@id"
+    },
+    "NodePosition": "cosmic:NodePosition",
+    "longitude": {
+      "@id": "cosmic:longitude",
+      "@type": "@id"
+    },
+    "Nodes": "cosmic:Nodes",
+    "mean": {
+      "@id": "cosmic:mean",
+      "@type": "@id"
+    },
+    "true": {
+      "@id": "cosmic:true",
+      "@type": "@id"
+    },
+    "south": {
+      "@id": "cosmic:south",
+      "@type": "@id"
+    },
+    "note": {
+      "@id": "cosmic:note",
+      "@type": "xsd:string"
+    },
+    "Chart": "cosmic:Chart",
+    "planets": {
+      "@id": "cosmic:planets",
+      "@type": "@id"
+    },
+    "aspects": {
+      "@id": "cosmic:aspects",
+      "@container": "@list"
+    },
+    "nodes": {
+      "@id": "cosmic:nodes",
+      "@type": "@id"
+    },
+    "BirthChartEcho": "cosmic:BirthChartEcho",
+    "BirthChartResponse": "cosmic:BirthChartResponse",
+    "chart": {
+      "@id": "cosmic:chart",
+      "@type": "@id"
+    },
+    "AspectsResponse": "cosmic:AspectsResponse",
+    "HousesResponse": "cosmic:HousesResponse",
+    "NormalizedBirth": "cosmic:NormalizedBirth",
+    "SynastryResponse": "cosmic:SynastryResponse",
+    "charts": {
+      "@id": "cosmic:charts"
+    },
+    "TransitsResult": "cosmic:TransitsResult",
+    "natal_chart": {
+      "@id": "cosmic:natal_chart",
+      "@type": "@id"
+    },
+    "transit_chart": {
+      "@id": "cosmic:transit_chart",
+      "@type": "@id"
+    },
+    "TransitsEcho": "cosmic:TransitsEcho",
+    "TransitsResponse": "cosmic:TransitsResponse",
+    "transits": {
+      "@id": "cosmic:transits",
+      "@type": "@id"
+    },
+    "InterpretationAtom": "cosmic:InterpretationAtom",
+    "planet_nature": {
+      "@id": "cosmic:planet_nature",
+      "@type": "xsd:string"
+    },
+    "planet_sect": {
+      "@id": "cosmic:planet_sect",
+      "@type": "xsd:string"
+    },
+    "chart_sect": {
+      "@id": "cosmic:chart_sect",
+      "@type": "xsd:string"
+    },
+    "aspect": {
+      "@id": "cosmic:aspect",
+      "@type": "xsd:string"
+    },
+    "natal_point": {
+      "@id": "cosmic:natal_point",
+      "@type": "@id"
+    },
+    "house": {
+      "@id": "cosmic:house"
+    },
+    "house_topics": {
+      "@id": "cosmic:house_topics",
+      "@container": "@list"
+    },
+    "tone": {
+      "@id": "cosmic:tone",
+      "@type": "xsd:string"
+    },
+    "intensity": {
+      "@id": "cosmic:intensity",
+      "@type": "xsd:decimal"
+    },
+    "tradition": {
+      "@id": "cosmic:tradition",
+      "@container": "@list"
+    },
+    "summary_key": {
+      "@id": "cosmic:summary_key",
+      "@type": "xsd:string"
+    },
+    "Interpretation": "cosmic:Interpretation",
+    "summary": {
+      "@id": "cosmic:summary"
+    },
+    "HoroscopeResponse": "cosmic:HoroscopeResponse",
+    "interpretation": {
+      "@id": "cosmic:interpretation",
+      "@type": "@id"
+    },
+    "TimelineSegment": "cosmic:TimelineSegment",
+    "nakshatra_index": {
+      "@id": "cosmic:nakshatra_index",
+      "@type": "xsd:integer"
+    },
+    "nakshatra_name": {
+      "@id": "cosmic:nakshatra_name",
+      "@type": "xsd:string"
+    },
+    "sidereal_longitude_start": {
+      "@id": "cosmic:sidereal_longitude_start",
+      "@type": "xsd:decimal"
+    },
+    "sidereal_longitude_end": {
+      "@id": "cosmic:sidereal_longitude_end",
+      "@type": "xsd:decimal"
+    },
+    "TimelineResponse": "cosmic:TimelineResponse",
+    "zodiac_used": {
+      "@id": "cosmic:zodiac_used"
+    },
+    "ayanamsa_used": {
+      "@id": "cosmic:ayanamsa_used",
+      "@type": "@id"
+    },
+    "step_seconds": {
+      "@id": "cosmic:step_seconds"
+    },
+    "segments": {
+      "@id": "cosmic:segments",
+      "@container": "@list"
+    },
+    "Error": "cosmic:Error",
+    "error": {
+      "@id": "cosmic:error",
+      "@type": "xsd:string"
+    },
+    "required": {
+      "@id": "cosmic:required"
+    },
+    "example": {
+      "@id": "cosmic:example"
+    },
+    "SelectedHouseSystem": "cosmic:SelectedHouseSystem",
+    "GauquelinSectors": "cosmic:GauquelinSectors",
+    "SelectedGauquelinSystem": "cosmic:SelectedGauquelinSystem",
+    "SelectedHouseSystems": "cosmic:SelectedHouseSystems",
+    "placidus": {
+      "@id": "cosmic:placidus",
+      "@type": "@id"
+    },
+    "porphyry": {
+      "@id": "cosmic:porphyry",
+      "@type": "@id"
+    },
+    "meridian": {
+      "@id": "cosmic:meridian",
+      "@type": "@id"
+    },
+    "campanus": {
+      "@id": "cosmic:campanus",
+      "@type": "@id"
+    },
+    "regiomontanus": {
+      "@id": "cosmic:regiomontanus",
+      "@type": "@id"
+    },
+    "alcabitius": {
+      "@id": "cosmic:alcabitius",
+      "@type": "@id"
+    },
+    "koch": {
+      "@id": "cosmic:koch",
+      "@type": "@id"
+    },
+    "morinus": {
+      "@id": "cosmic:morinus",
+      "@type": "@id"
+    },
+    "topocentric": {
+      "@id": "cosmic:topocentric",
+      "@type": "@id"
+    },
+    "sripati": {
+      "@id": "cosmic:sripati",
+      "@type": "@id"
+    },
+    "vehlow": {
+      "@id": "cosmic:vehlow",
+      "@type": "@id"
+    },
+    "horizon": {
+      "@id": "cosmic:horizon",
+      "@type": "@id"
+    },
+    "krusinski": {
+      "@id": "cosmic:krusinski",
+      "@type": "@id"
+    },
+    "sunshine": {
+      "@id": "cosmic:sunshine",
+      "@type": "@id"
+    },
+    "sunshine_alt": {
+      "@id": "cosmic:sunshine_alt",
+      "@type": "@id"
+    },
+    "savard": {
+      "@id": "cosmic:savard",
+      "@type": "@id"
+    },
+    "pullen_sd": {
+      "@id": "cosmic:pullen_sd",
+      "@type": "@id"
+    },
+    "pullen_sr": {
+      "@id": "cosmic:pullen_sr",
+      "@type": "@id"
+    },
+    "carter": {
+      "@id": "cosmic:carter",
+      "@type": "@id"
+    },
+    "apc": {
+      "@id": "cosmic:apc",
+      "@type": "@id"
+    },
+    "equal_mc": {
+      "@id": "cosmic:equal_mc",
+      "@type": "@id"
+    },
+    "natural": {
+      "@id": "cosmic:natural",
+      "@type": "@id"
+    },
+    "gauquelin": {
+      "@id": "cosmic:gauquelin",
+      "@type": "@id"
+    },
+    "SelectedHouseMetadata": "cosmic:SelectedHouseMetadata",
+    "fallback": {
+      "@id": "cosmic:fallback"
+    },
+    "convention": {
+      "@id": "cosmic:convention",
+      "@type": "xsd:string"
+    },
+    "variant": {
+      "@id": "cosmic:variant",
+      "@type": "xsd:string"
+    },
+    "sun_declination_frame": {
+      "@id": "cosmic:sun_declination_frame",
+      "@type": "xsd:string"
+    },
+    "polar_policy": {
+      "@id": "cosmic:polar_policy",
+      "@type": "xsd:string"
+    },
+    "SelectedHouses": "cosmic:SelectedHouses",
+    "CalculationBirthInput": "cosmic:CalculationBirthInput",
+    "NatalSvgRequest": "cosmic:NatalSvgRequest",
+    "theme": {
+      "@id": "cosmic:theme",
+      "@type": "xsd:string"
+    },
+    "show_aspects": {
+      "@id": "cosmic:show_aspects",
+      "@type": "xsd:boolean"
+    },
+    "include_png": {
+      "@id": "cosmic:include_png",
+      "@type": "xsd:boolean"
+    },
+    "additional_points": {
+      "@id": "cosmic:additional_points",
+      "@type": "@id"
+    },
+    "aspect_profile": {
+      "@id": "cosmic:aspect_profile",
+      "@type": "@id"
+    },
+    "PngExport": "cosmic:PngExport",
+    "base64": {
+      "@id": "cosmic:base64",
+      "@type": "xsd:string"
+    },
+    "width": {
+      "@id": "cosmic:width",
+      "@type": "xsd:integer"
+    },
+    "height": {
+      "@id": "cosmic:height",
+      "@type": "xsd:integer"
+    },
+    "renderer": {
+      "@id": "cosmic:renderer",
+      "@type": "xsd:string"
+    },
+    "source_svg_sha256": {
+      "@id": "cosmic:source_svg_sha256",
+      "@type": "xsd:string"
+    },
+    "NatalSvgMetadata": "cosmic:NatalSvgMetadata",
+    "position_source": {
+      "@id": "cosmic:position_source",
+      "@type": "xsd:string"
+    },
+    "layout": {
+      "@id": "cosmic:layout",
+      "@type": "xsd:string"
+    },
+    "house_status": {
+      "@id": "cosmic:house_status",
+      "@type": "xsd:string"
+    },
+    "NatalSvgResponse": "cosmic:NatalSvgResponse",
+    "svg": {
+      "@id": "cosmic:svg",
+      "@type": "xsd:string"
+    },
+    "aspect_configuration": {
+      "@id": "cosmic:aspect_configuration",
+      "@type": "@id"
+    },
+    "png": {
+      "@id": "cosmic:png",
+      "@type": "@id"
+    },
+    "VargasRequest": "cosmic:VargasRequest",
+    "division": {
+      "@id": "cosmic:division",
+      "@type": "xsd:integer"
+    },
+    "d150_method": {
+      "@id": "cosmic:d150_method",
+      "@type": "xsd:string"
+    },
+    "VimshottariRequest": "cosmic:VimshottariRequest",
+    "depth": {
+      "@id": "cosmic:depth",
+      "@type": "xsd:integer"
+    },
+    "VargaPosition": "cosmic:VargaPosition",
+    "sidereal_longitude": {
+      "@id": "cosmic:sidereal_longitude",
+      "@type": "xsd:decimal"
+    },
+    "divisional_longitude": {
+      "@id": "cosmic:divisional_longitude",
+      "@type": "xsd:decimal"
+    },
+    "sign_index": {
+      "@id": "cosmic:sign_index",
+      "@type": "xsd:integer"
+    },
+    "degree_in_sign": {
+      "@id": "cosmic:degree_in_sign",
+      "@type": "xsd:decimal"
+    },
+    "division_index": {
+      "@id": "cosmic:division_index",
+      "@type": "xsd:integer"
+    },
+    "VargaBodies": "cosmic:VargaBodies",
+    "sun": {
+      "@id": "cosmic:sun",
+      "@type": "@id"
+    },
+    "moon": {
+      "@id": "cosmic:moon",
+      "@type": "@id"
+    },
+    "mercury": {
+      "@id": "cosmic:mercury",
+      "@type": "@id"
+    },
+    "venus": {
+      "@id": "cosmic:venus",
+      "@type": "@id"
+    },
+    "mars": {
+      "@id": "cosmic:mars",
+      "@type": "@id"
+    },
+    "jupiter": {
+      "@id": "cosmic:jupiter",
+      "@type": "@id"
+    },
+    "saturn": {
+      "@id": "cosmic:saturn",
+      "@type": "@id"
+    },
+    "rahu": {
+      "@id": "cosmic:rahu",
+      "@type": "@id"
+    },
+    "ketu": {
+      "@id": "cosmic:ketu",
+      "@type": "@id"
+    },
+    "VargasMetadata": "cosmic:VargasMetadata",
+    "calculation_status": {
+      "@id": "cosmic:calculation_status",
+      "@type": "xsd:string"
+    },
+    "practitioner_review": {
+      "@id": "cosmic:practitioner_review",
+      "@type": "xsd:string"
+    },
+    "frame": {
+      "@id": "cosmic:frame",
+      "@type": "xsd:string"
+    },
+    "node_model": {
+      "@id": "cosmic:node_model",
+      "@type": "xsd:string"
+    },
+    "classification_precision": {
+      "@id": "cosmic:classification_precision",
+      "@type": "xsd:string"
+    },
+    "interpretations": {
+      "@id": "cosmic:interpretations",
+      "@type": "xsd:boolean"
+    },
+    "mapping": {
+      "@id": "cosmic:mapping",
+      "@type": "xsd:string"
+    },
+    "boundaries": {
+      "@id": "cosmic:boundaries",
+      "@type": "xsd:string"
+    },
+    "divisional_degrees": {
+      "@id": "cosmic:divisional_degrees",
+      "@type": "xsd:string"
+    },
+    "d2_convention": {
+      "@id": "cosmic:d2_convention",
+      "@type": "xsd:string"
+    },
+    "d5_convention": {
+      "@id": "cosmic:d5_convention",
+      "@type": "xsd:string"
+    },
+    "d6_convention": {
+      "@id": "cosmic:d6_convention",
+      "@type": "xsd:string"
+    },
+    "d8_convention": {
+      "@id": "cosmic:d8_convention",
+      "@type": "xsd:string"
+    },
+    "d11_convention": {
+      "@id": "cosmic:d11_convention",
+      "@type": "xsd:string"
+    },
+    "d40_convention": {
+      "@id": "cosmic:d40_convention",
+      "@type": "xsd:string"
+    },
+    "d45_convention": {
+      "@id": "cosmic:d45_convention",
+      "@type": "xsd:string"
+    },
+    "d81_convention": {
+      "@id": "cosmic:d81_convention",
+      "@type": "xsd:string"
+    },
+    "d108_convention": {
+      "@id": "cosmic:d108_convention",
+      "@type": "xsd:string"
+    },
+    "d144_convention": {
+      "@id": "cosmic:d144_convention",
+      "@type": "xsd:string"
+    },
+    "d150_convention": {
+      "@id": "cosmic:d150_convention",
+      "@type": "xsd:string"
+    },
+    "segment_model": {
+      "@id": "cosmic:segment_model",
+      "@type": "xsd:string"
+    },
+    "d60_convention": {
+      "@id": "cosmic:d60_convention",
+      "@type": "xsd:string"
+    },
+    "VargasResponse": "cosmic:VargasResponse",
+    "birth_utc": {
+      "@id": "cosmic:birth_utc",
+      "@type": "@id"
+    },
+    "bodies": {
+      "@id": "cosmic:bodies",
+      "@type": "@id"
+    },
+    "DashaLord": "cosmic:DashaLord",
+    "DashaSubperiod": "cosmic:DashaSubperiod",
+    "lord": {
+      "@id": "cosmic:lord",
+      "@type": "@id"
+    },
+    "years": {
+      "@id": "cosmic:years",
+      "@type": "xsd:decimal"
+    },
+    "active_at_birth": {
+      "@id": "cosmic:active_at_birth",
+      "@type": "xsd:boolean"
+    },
+    "DashaPeriod": "cosmic:DashaPeriod",
+    "subperiods": {
+      "@id": "cosmic:subperiods",
+      "@container": "@list"
+    },
+    "VimshottariMetadata": "cosmic:VimshottariMetadata",
+    "year_length": {
+      "@id": "cosmic:year_length"
+    },
+    "interval": {
+      "@id": "cosmic:interval",
+      "@type": "xsd:string"
+    },
+    "timestamp_resolution": {
+      "@id": "cosmic:timestamp_resolution",
+      "@type": "xsd:string"
+    },
+    "birth_balance_rounding": {
+      "@id": "cosmic:birth_balance_rounding",
+      "@type": "xsd:string"
+    },
+    "cycle_anchor": {
+      "@id": "cosmic:cycle_anchor",
+      "@type": "xsd:string"
+    },
+    "period_timestamps": {
+      "@id": "cosmic:period_timestamps",
+      "@type": "xsd:string"
+    },
+    "AshtakootaRequest": "cosmic:AshtakootaRequest",
+    "groom": {
+      "@id": "cosmic:groom",
+      "@type": "@id"
+    },
+    "bride": {
+      "@id": "cosmic:bride",
+      "@type": "@id"
+    },
+    "AshtakootaClassification": "cosmic:AshtakootaClassification",
+    "sidereal_moon_longitude": {
+      "@id": "cosmic:sidereal_moon_longitude",
+      "@type": "xsd:decimal"
+    },
+    "moon_sign_index": {
+      "@id": "cosmic:moon_sign_index",
+      "@type": "xsd:integer"
+    },
+    "moon_sign": {
+      "@id": "cosmic:moon_sign",
+      "@type": "@id"
+    },
+    "varna": {
+      "@id": "cosmic:varna",
+      "@type": "xsd:string"
+    },
+    "vashya": {
+      "@id": "cosmic:vashya",
+      "@type": "xsd:string"
+    },
+    "yoni": {
+      "@id": "cosmic:yoni",
+      "@type": "xsd:string"
+    },
+    "gana": {
+      "@id": "cosmic:gana",
+      "@type": "xsd:string"
+    },
+    "nadi": {
+      "@id": "cosmic:nadi",
+      "@type": "xsd:string"
+    },
+    "AshtakootaBasicScore": "cosmic:AshtakootaBasicScore",
+    "score": {
+      "@id": "cosmic:score",
+      "@type": "xsd:decimal"
+    },
+    "maximum": {
+      "@id": "cosmic:maximum",
+      "@type": "xsd:integer"
+    },
+    "groom_value": {
+      "@id": "cosmic:groom_value",
+      "@type": "xsd:string"
+    },
+    "bride_value": {
+      "@id": "cosmic:bride_value",
+      "@type": "xsd:string"
+    },
+    "AshtakootaTaraScore": "cosmic:AshtakootaTaraScore",
+    "groom_to_bride_count": {
+      "@id": "cosmic:groom_to_bride_count",
+      "@type": "xsd:integer"
+    },
+    "bride_to_groom_count": {
+      "@id": "cosmic:bride_to_groom_count",
+      "@type": "xsd:integer"
+    },
+    "groom_to_bride_score": {
+      "@id": "cosmic:groom_to_bride_score",
+      "@type": "xsd:decimal"
+    },
+    "bride_to_groom_score": {
+      "@id": "cosmic:bride_to_groom_score",
+      "@type": "xsd:decimal"
+    },
+    "AshtakootaGrahaMaitriScore": "cosmic:AshtakootaGrahaMaitriScore",
+    "groom_lord_to_bride_lord": {
+      "@id": "cosmic:groom_lord_to_bride_lord",
+      "@type": "xsd:string"
+    },
+    "bride_lord_to_groom_lord": {
+      "@id": "cosmic:bride_lord_to_groom_lord",
+      "@type": "xsd:string"
+    },
+    "AshtakootaBhakootScore": "cosmic:AshtakootaBhakootScore",
+    "groom_to_bride_sign_distance": {
+      "@id": "cosmic:groom_to_bride_sign_distance",
+      "@type": "xsd:integer"
+    },
+    "bride_to_groom_sign_distance": {
+      "@id": "cosmic:bride_to_groom_sign_distance",
+      "@type": "xsd:integer"
+    },
+    "AshtakootaKootas": "cosmic:AshtakootaKootas",
+    "tara": {
+      "@id": "cosmic:tara",
+      "@type": "@id"
+    },
+    "graha_maitri": {
+      "@id": "cosmic:graha_maitri",
+      "@type": "@id"
+    },
+    "bhakoot": {
+      "@id": "cosmic:bhakoot",
+      "@type": "@id"
+    },
+    "AshtakootaResponse": "cosmic:AshtakootaResponse",
+    "kootas": {
+      "@id": "cosmic:kootas",
+      "@type": "@id"
+    },
+    "AshtakavargaRequest": "cosmic:AshtakavargaRequest",
+    "include_reductions": {
+      "@id": "cosmic:include_reductions",
+      "@type": "xsd:boolean"
+    },
+    "AshtakavargaSignPosition": "cosmic:AshtakavargaSignPosition",
+    "AshtakavargaSignPositions": "cosmic:AshtakavargaSignPositions",
+    "AshtakavargaBhinnaRow": "cosmic:AshtakavargaBhinnaRow",
+    "benefic_points": {
+      "@id": "cosmic:benefic_points",
+      "@container": "@list"
+    },
+    "AshtakavargaBhinna": "cosmic:AshtakavargaBhinna",
+    "AshtakavargaPrastaraTarget": "cosmic:AshtakavargaPrastaraTarget",
+    "AshtakavargaPrastara": "cosmic:AshtakavargaPrastara",
+    "AshtakavargaHouse": "cosmic:AshtakavargaHouse",
+    "AshtakavargaSarva": "cosmic:AshtakavargaSarva",
+    "houses_from_ascendant": {
+      "@id": "cosmic:houses_from_ascendant",
+      "@container": "@list"
+    },
+    "AshtakavargaGrahaTerms": "cosmic:AshtakavargaGrahaTerms",
+    "AshtakavargaPinda": "cosmic:AshtakavargaPinda",
+    "rashi": {
+      "@id": "cosmic:rashi",
+      "@type": "xsd:integer"
+    },
+    "graha": {
+      "@id": "cosmic:graha",
+      "@type": "xsd:integer"
+    },
+    "shodhya": {
+      "@id": "cosmic:shodhya",
+      "@type": "xsd:integer"
+    },
+    "graha_terms": {
+      "@id": "cosmic:graha_terms",
+      "@type": "@id"
+    },
+    "AshtakavargaReductionRow": "cosmic:AshtakavargaReductionRow",
+    "before_reduction": {
+      "@id": "cosmic:before_reduction",
+      "@type": "@id"
+    },
+    "after_trikona_shodhana": {
+      "@id": "cosmic:after_trikona_shodhana",
+      "@type": "@id"
+    },
+    "after_ekadhipatya_shodhana": {
+      "@id": "cosmic:after_ekadhipatya_shodhana",
+      "@type": "@id"
+    },
+    "pinda": {
+      "@id": "cosmic:pinda",
+      "@type": "@id"
+    },
+    "AshtakavargaReductionRows": "cosmic:AshtakavargaReductionRows",
+    "AshtakavargaReductions": "cosmic:AshtakavargaReductions",
+    "ruleset": {
+      "@id": "cosmic:ruleset",
+      "@type": "xsd:string"
+    },
+    "conventions": {
+      "@id": "cosmic:conventions"
+    },
+    "occupied_sign_indexes": {
+      "@id": "cosmic:occupied_sign_indexes",
+      "@container": "@list"
+    },
+    "rows": {
+      "@id": "cosmic:rows",
+      "@type": "@id"
+    },
+    "reduced_row_summary": {
+      "@id": "cosmic:reduced_row_summary"
+    },
+    "AshtakavargaMetadata": "cosmic:AshtakavargaMetadata",
+    "point_terminology": {
+      "@id": "cosmic:point_terminology",
+      "@type": "xsd:string"
+    },
+    "reductions": {
+      "@id": "cosmic:reductions",
+      "@type": "xsd:boolean"
+    },
+    "pinda_sadhana": {
+      "@id": "cosmic:pinda_sadhana",
+      "@type": "xsd:boolean"
+    },
+    "predictions": {
+      "@id": "cosmic:predictions",
+      "@type": "xsd:boolean"
+    },
+    "AshtakavargaResponse": "cosmic:AshtakavargaResponse",
+    "sign_positions": {
+      "@id": "cosmic:sign_positions",
+      "@type": "@id"
+    },
+    "bhinnashtakavarga": {
+      "@id": "cosmic:bhinnashtakavarga",
+      "@type": "@id"
+    },
+    "prastara": {
+      "@id": "cosmic:prastara",
+      "@type": "@id"
+    },
+    "sarvashtakavarga": {
+      "@id": "cosmic:sarvashtakavarga",
+      "@type": "@id"
+    },
+    "CivilTimeInput": "cosmic:CivilTimeInput",
+    "CalculationMomentResult": "cosmic:CalculationMomentResult",
+    "PanchangRequest": "cosmic:PanchangRequest",
+    "at": {
+      "@id": "cosmic:at",
+      "@type": "@id"
+    },
+    "PanchangWeekday": "cosmic:PanchangWeekday",
+    "SolarEvent": "cosmic:SolarEvent",
+    "local": {
+      "@id": "cosmic:local",
+      "@type": "@id"
+    },
+    "PanchangSolarEvents": "cosmic:PanchangSolarEvents",
+    "local_date": {
+      "@id": "cosmic:local_date",
+      "@type": "@id"
+    },
+    "sunrise": {
+      "@id": "cosmic:sunrise",
+      "@container": "@list"
+    },
+    "sunset": {
+      "@id": "cosmic:sunset",
+      "@container": "@list"
+    },
+    "sunrise_status": {
+      "@id": "cosmic:sunrise_status",
+      "@type": "xsd:string"
+    },
+    "sunset_status": {
+      "@id": "cosmic:sunset_status",
+      "@type": "xsd:string"
+    },
+    "model": {
+      "@id": "cosmic:model",
+      "@type": "xsd:string"
+    },
+    "horizon_degrees": {
+      "@id": "cosmic:horizon_degrees",
+      "@type": "xsd:decimal"
+    },
+    "elevation_m": {
+      "@id": "cosmic:elevation_m",
+      "@type": "xsd:decimal"
+    },
+    "PanchangMetadata": "cosmic:PanchangMetadata",
+    "classification_time": {
+      "@id": "cosmic:classification_time",
+      "@type": "xsd:string"
+    },
+    "intervals": {
+      "@id": "cosmic:intervals",
+      "@type": "xsd:string"
+    },
+    "weekday_basis": {
+      "@id": "cosmic:weekday_basis",
+      "@type": "xsd:string"
+    },
+    "vara_basis": {
+      "@id": "cosmic:vara_basis",
+      "@type": "xsd:string"
+    },
+    "regional_calendar": {
+      "@id": "cosmic:regional_calendar",
+      "@type": "xsd:boolean"
+    },
+    "festivals": {
+      "@id": "cosmic:festivals",
+      "@type": "xsd:boolean"
+    },
+    "PanchangResponse": "cosmic:PanchangResponse",
+    "at_utc": {
+      "@id": "cosmic:at_utc",
+      "@type": "@id"
+    },
+    "longitudes": {
+      "@id": "cosmic:longitudes"
+    },
+    "tithi": {
+      "@id": "cosmic:tithi"
+    },
+    "yoga": {
+      "@id": "cosmic:yoga"
+    },
+    "karana": {
+      "@id": "cosmic:karana"
+    },
+    "weekday": {
+      "@id": "cosmic:weekday",
+      "@type": "@id"
+    },
+    "vara": {
+      "@id": "cosmic:vara",
+      "@type": "@id"
+    },
+    "solar_events": {
+      "@id": "cosmic:solar_events",
+      "@type": "@id"
+    },
+    "VargaSvgRequest": "cosmic:VargaSvgRequest",
+    "VargaSvgResponse": "cosmic:VargaSvgResponse",
+    "CompositeRequest": "cosmic:CompositeRequest",
+    "SecondaryProgressionsRequest": "cosmic:SecondaryProgressionsRequest",
+    "target": {
+      "@id": "cosmic:target",
+      "@type": "@id"
+    },
+    "WesternPoint": "cosmic:WesternPoint",
+    "WesternPlanets": "cosmic:WesternPlanets",
+    "WesternAngles": "cosmic:WesternAngles",
+    "WesternHouses": "cosmic:WesternHouses",
+    "cusps": {
+      "@id": "cosmic:cusps"
+    },
+    "CompositeMetadata": "cosmic:CompositeMetadata",
+    "physical_chart": {
+      "@id": "cosmic:physical_chart",
+      "@type": "xsd:boolean"
+    },
+    "source_frame": {
+      "@id": "cosmic:source_frame",
+      "@type": "xsd:string"
+    },
+    "position_precision": {
+      "@id": "cosmic:position_precision",
+      "@type": "xsd:string"
+    },
+    "angle_policy": {
+      "@id": "cosmic:angle_policy",
+      "@type": "xsd:string"
+    },
+    "house_policy": {
+      "@id": "cosmic:house_policy",
+      "@type": "xsd:string"
+    },
+    "antipodal_policy": {
+      "@id": "cosmic:antipodal_policy",
+      "@type": "xsd:string"
+    },
+    "inner_planet_policy": {
+      "@id": "cosmic:inner_planet_policy",
+      "@type": "xsd:string"
+    },
+    "sidereal_policy": {
+      "@id": "cosmic:sidereal_policy",
+      "@type": "xsd:string"
+    },
+    "aspect_policy": {
+      "@id": "cosmic:aspect_policy",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Cosmic Ephemeris API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Cosmic Ephemeris's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/cosmic-ephemeris-openapi.json.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/cosmic-ephemeris-openapi.json"
+  ]
+}

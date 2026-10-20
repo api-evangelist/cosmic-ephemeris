@@ -1,0 +1,4 @@
+Contact: mailto:support@cosmicephemeris.com
+Expires: 2027-10-01T00:00:00Z
+Preferred-Languages: en
+Canonical: https://cosmicephemeris.com/.well-known/security.txt

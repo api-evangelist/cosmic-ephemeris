@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cosmic-ephemeris/main/json-schema/cosmic-ephemeris-place-search-response-schema.json",
+  "title": "PlaceSearchResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cosmic-ephemeris-openapi.json#/components/schemas/PlaceSearchResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "status",
+    "query",
+    "results",
+    "result_count",
+    "metadata"
+  ],
+  "properties": {
+    "type": {
+      "const": "place_search"
+    },
+    "status": {
+      "const": "current"
+    },
+    "query": {
+      "type": "string"
+    },
+    "results": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/PlaceCandidate"
+      }
+    },
+    "result_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "Latitude": {
+      "anyOf": [
+        {
+          "type": "number",
+          "exclusiveMinimum": -90,
+          "exclusiveMaximum": 90
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+        }
+      ],
+      "description": "WGS84 decimal latitude. JSON numbers are recommended; numeric strings are accepted by the current engine, then checked for finiteness/range. Exact poles and undefined Ascendant geometry return 400; supported successful latitude is strictly between -90 and 90. Boolean/null/object/array coordinates are invalid."
+    },
+    "Longitude": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        {
+          "type": "string",
+          "pattern": "^\\s*[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?\\s*$"
+        }
+      ],
+      "description": "WGS84 decimal longitude, east positive, within [-180,180]. JSON numbers are recommended; numeric strings are accepted then checked for finiteness/range."
+    },
+    "PlaceCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "place_id",
+        "display_name",
+        "country_code",
+        "lat",
+        "lon",
+        "timezone",
+        "provenance"
+      ],
+      "properties": {
+        "place_id": {
+          "type": "string",
+          "pattern": "^geonames:[1-9][0-9]{0,11}:2026-10-02$"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "country_code": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "admin1": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "lat": {
+          "$ref": "#/$defs/Latitude"
+        },
+        "lon": {
+          "$ref": "#/$defs/Longitude"
+        },
+        "timezone": {
+          "$ref": "#/$defs/Timezone"
+        },
+        "provenance": {
+          "$ref": "#/$defs/PlaceProvenance"
+        }
+      }
+    },
+    "PlaceProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "dataset_version",
+        "source_id",
+        "license_id",
+        "attribution"
+      ],
+      "properties": {
+        "provider": {
+          "const": "geonames-self-hosted"
+        },
+        "dataset_version": {
+          "const": "2026-10-02"
+        },
+        "source_id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,11}$"
+        },
+        "license_id": {
+          "const": "CC-BY-4.0"
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "Timezone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "IANA timezone name (for example America/New_York). Omission, null, or empty string means UTC for a birth input. Nonexistent or ambiguous local clock-change times return 400; provide the known UTC date/time with timezone UTC instead."
+    }
+  }
+}

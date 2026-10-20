@@ -1,0 +1,17 @@
+generated: '2026-10-20'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://cosmicephemeris.com/docs-onboarding-context.html
+sources:
+- https://cosmicephemeris.com/docs-onboarding-context.html
+- https://cosmicephemeris.com/docs-auth.html
+idempotency:
+  coverage: partial
+  header: Idempotency-Key
+  evidence: Every submission to /api/jobs and /api/jobs/import requires an 8–128 character Idempotency-Key. Reusing the key with identical normalized
+    request returns the existing job; with different content returns 409.
+  scope:
+  - not enumerated on the pages read
+pagination: {}
+authentication: Bearer token in Authorization header (API key)
+docs: https://cosmicephemeris.com/docs-onboarding-context.html

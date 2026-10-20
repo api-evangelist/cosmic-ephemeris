@@ -1,0 +1,46 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 2
+  own: 2
+  other_domain: 0
+  platform: 0
+  roles:
+  - api
+  - website
+hosts:
+- host: api.cosmicephemeris.com
+  found_by:
+  - apis[]
+  - contract-discovery
+  types: []
+  serves:
+  - api
+  registrable_domain: cosmicephemeris.com
+  role: api
+  relation: own
+- host: cosmicephemeris.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  types:
+  - TermsOfService
+  - SignUp
+  - PrivacyPolicy
+  - Pricing
+  - GettingStarted
+  - Website
+  - Documentation
+  serves:
+  - docs
+  - spec
+  registrable_domain: cosmicephemeris.com
+  role: website
+  relation: own

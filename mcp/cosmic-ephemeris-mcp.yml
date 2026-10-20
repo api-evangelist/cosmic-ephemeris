@@ -1,0 +1,8 @@
+generated: '2023-10-20'
+method: probed
+source: https://cosmicephemeris.com/docs-mcp.html
+deployment:
+  mode: remote
+  endpoint: https://api.cosmicephemeris.com/mcp
+  auth: api-key
+  verified: probed
